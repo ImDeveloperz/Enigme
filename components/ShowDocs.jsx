@@ -8,6 +8,9 @@ const ShowDocs = () => {
                 <h1 className='text-white'>
                     
                 </h1>
+                <button className=''>
+                  Ajoute Compte
+                </button>
             </div>
         </div>
         <div>
