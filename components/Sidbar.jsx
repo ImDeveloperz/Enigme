@@ -1,22 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { RiAccountBoxFill } from 'react-icons/ri'
 import { FaCalendar } from 'react-icons/fa'
 import { SiFiles } from 'react-icons/si'
 import logoLight from '../images/logoLight.png'
-// import logoDark from '../images/logoDark.png'
-// import { useAtom } from 'jotai/react';
 import { Popover, Button, Text, Grid } from "@nextui-org/react";
 import { CgProfile } from "react-icons/cg";
 import { MdLogout } from "react-icons/md";
-// import { ThemeSwitcher } from './utils';
-// import { useStateContext } from '../utils/contextProvider';
-// import axiosClient from '../axios-client';
+import { AuthContext, useStateContext } from '../utils/AuthContext';
+import axiosClient from '../axios-client';
 import {RiUserSearchLine} from 'react-icons/ri'
 import { AiOutlineClose } from 'react-icons/ai';
 import { HiMenuAlt4 } from 'react-icons/hi';
 import Link from 'next/link'
 import Image from 'next/image'
-// import AuthUser from './utils/AuthUser';
+import { useRouter } from 'next/router';
 
 
 
@@ -43,11 +40,19 @@ export const Administration = ({ role,style}) => {
   return null;
 }
 const Sidbar = () => {
+  const router=useRouter()
   const [count, setCount] = useState(0);
-  // const { user, token, setUser, setToken } = useStateContext();
-  // const res=AuthUser();
-  const [isOpen, setIsOpen] = useState(false);
-  // const [curentTheme, setcCrentTheme] = useAtom(theme)
+  const { user, token, setUser, setToken } = useStateContext();
+  // get the user with the token
+  useEffect(() => {
+    axiosClient.get('/user/user',token)
+      .then(({ data }) => {
+        setUser(data.user)
+      }).catch(err=> console.log(err))
+  }, [])
+
+
+    const [isOpen, setIsOpen] = useState(false);
   const listeBar = [{
     Link: "./",
     icon: <SiFiles className='' fontSize={20} />,
@@ -87,7 +92,7 @@ const Sidbar = () => {
   }
 
   return (
-    <nav className='px-6 w-full flex justify-between   max-h-26 items-center  text-black  white-glassmorphism shadow-2xl sticky top-0  '>
+    <nav className='px-6 w-full flex justify-between   items-center  text-black  white-glassmorphism shadow-2xl  '>
       <div className='md:w-[15%] '>
         <Image src={logoLight} alt="" className='w-40 h-18' />
       </div>
@@ -111,12 +116,12 @@ const Sidbar = () => {
         </Popover.Trigger>
         <Popover.Content>
           <Text css={{ p: "$10" }}>
-            {/* <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
                <div className='flex flex-col gap-2'>
-               <p>{user.name} {user.prenom}</p>
-              <p>{user.email}</p>
+               <p>{user?.name} {user?.prenom}</p>
+              <p>{user?.email}</p>
                </div>
-              <button className='flex gap-2 items-center rounded p-2  cursor-pointer hover:bg-slate-200' onClick={()=>{navigate('./user')}}>
+              <button className='flex gap-2 items-center rounded p-2  cursor-pointer hover:bg-slate-200' onClick={()=>{router.push('/Docpage/profileView')}}>
                 <RiUserSearchLine />
                 <p>Consulter mon profile</p>
                 </button>
@@ -124,7 +129,7 @@ const Sidbar = () => {
                 <MdLogout  />
                 <p>Se deconnecter</p>
               </div>
-            </div> */}
+            </div>
           </Text>
         </Popover.Content>
       </Popover>

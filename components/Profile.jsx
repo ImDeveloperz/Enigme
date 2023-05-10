@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 // import AuthUser from './utils/AuthUser'
 
 import ProfileEdit from './ProfileEdit';
-import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+// import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import ProfileView from './ProfileView';
-// import { useStateContext } from '../contexts/contextProvider';
-// import axiosClient from '../axios-client';
+import { useStateContext } from '../config/AuthContext';
+import axiosClient from '../axios-client';
 
 const Profile = () => {
   // const { user } = AuthUser()
@@ -18,10 +18,11 @@ const Profile = () => {
   // }, [])
   return (
     <div>
-        <Routes>
+        {/* <Routes>
           <Route path='/:id' element={<ProfileEdit/>}/>
           <Route path='/'  element={<ProfileView/>}/>
-        </Routes>
+        </Routes> */}
+        <ProfileView/>
     </div>
     
   )

@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import { db } from "../../../config/db"
+const secret = process.env.SECRET;
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const {name,prenom, email, password } = req.body;
@@ -16,7 +17,13 @@ export default async function handler(req, res) {
       if (error) {
         res.status(500).json({ message: error });
       } else {
-        const token = jwt.sign({ id: results.insertId }, 'my_secret_key');
+        const token =sign(
+          {
+            exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, // 30 days
+            email: email,
+          },
+          secret
+        );
         db.execute(
           'SELECT * FROM `users` where email=? ',[email],
           function(err, results, fields) {

@@ -52,6 +52,7 @@ export const SignUp = () => {
           console.log(data)
           setUser(data.user)
           console.log(data)
+          router.push('/Docpage');
           setError("");
          }
          setErrors({})
@@ -157,7 +158,6 @@ export const SignIn = () => {
   });
   const login = async (e) => {
     e.preventDefault();
-    console.log('hi')
     const payload = {
       email: emailref.current.value,
       password: passwordref.current.value,
@@ -167,9 +167,10 @@ export const SignIn = () => {
       // Submit the form if validation succeeds
       axiosClient.post('/auth/login', payload).then(({ data }) => {
         setError('')
-        console.log(data.status)
         if(!data.message)
         {
+          setUser(data.user);
+          setToken(data.token);
           router.push('/Docpage')
         }
         setError(data.message)

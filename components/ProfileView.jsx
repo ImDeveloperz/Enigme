@@ -1,29 +1,32 @@
+'use-client'
 import React, { useEffect, useState } from 'react'
 import avatar from '../images/avatar.png'
-// import { useStateContext } from '../contexts/contextProvider'
-import { Link } from 'react-router-dom'
-// import axiosClient from '../axios-client'
+import { useStateContext } from '../utils/AuthContext';
+
+import axiosClient from '../axios-client'
 import { User } from '@nextui-org/react'
 import Skeleton from './skeleton/Skeleton'
+import Image from 'next/image';
+import Link from 'next/link';
 const ProfileView = ({ id }) => {
   const { user, token, setUser, setToken } = useStateContext();
   const [isLoading, setLoading] = useState(false);
-  
-  // useEffect(() => {
-  //   setLoading(true);
-  //   console.log(user)
-  //   axiosClient.get('/user')
-  //     .then(({ data }) => {
-  //       setUser(data)
-  //       setLoading(false);
-  //       console.log(user)
-  //     })
-  // }, [])
+  console.log(user);
+  useEffect(() => {
+    setLoading(true);
+    console.log(user)
+    axiosClient.get('/user/user',token)
+      .then(({ data }) => {
+        setUser(data.user)
+        setLoading(false);
+      }).catch(err=> console.log(err))
+  }, [])
+  console.log(user);
   return (
-    <div className='p-4 flex flex-col gap-10'>
+    <div className='p-4 flex flex-col gap-10 text-black'>
       <div className='flex items-center gap-8 text-sm font-semibold shadow-xl rounded-xl border p-8'>
         {isLoading ? <Skeleton classes="profile-circle"/> :
-                 <img src={avatar} alt="" className='w-[12rem] h-[11.5rem]' />
+                 <Image src={avatar} alt="" className='w-[12rem] h-[11.5rem]' />
         }
         
         <div className='flex flex-col gap-4  w-full '>
@@ -69,10 +72,9 @@ const ProfileView = ({ id }) => {
           type="submit"
           className="rounded-md md:w-[15%] w-[25%] bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-           <Link to={'/docs/user/' + user.id}> Modifier Votre Profile</Link>
+           <Link href={'/docs/user/' + user.id}> Modifier Votre Profile</Link>
         </button>
       </div>
-    
     </div>
   )
 }
