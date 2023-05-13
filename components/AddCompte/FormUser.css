@@ -1,0 +1,45 @@
+
+label , input {
+    margin: 10px;
+    display: inline-block;
+    min-width: 60px;
+    /* font-family: 'Poppins' , sans-serif; */
+}
+
+input{
+    padding: 13px;
+    outline-color: #2766e5;
+    color: #282c34;
+    font-size: 14px;
+    width: 180px;
+    border-radius: 10px;
+    border: 2px solid  gray; 
+}
+
+select{
+    padding: 13px;
+    outline-color: #2766e5;
+    /* color: #282c34; */
+    font-size: 14px;
+    width: 165px;
+    border-radius: 10px;
+    border: 2px solid  gray;  
+    background-color: white;
+    line-height: 30px;
+}
+
+
+
+
+
+
+label , select {
+    min-width: 60px;
+    margin: 10px;
+    display: inline-block;
+}
+
+
+label , input {
+    display: inline-block;
+}
