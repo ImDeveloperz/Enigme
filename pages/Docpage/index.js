@@ -4,7 +4,6 @@ import Loading from "@/components/suspense/Loading";
 import Layout from "@/components/Layout";
 const Docpage = () => {
   // const { user, token, setUser,setToken } = useStateContext();
-  // const { user } = AuthUser();
   // console.log(token)
   //   useEffect(() => {
   //     axiosClient.get('/user')

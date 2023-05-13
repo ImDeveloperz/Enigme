@@ -1,3 +1,4 @@
+'use-client'
 import React, { useState } from 'react'
 import { Footer, Home, Navbar, Servises, Contact, About, Services2 } from '../components'
 // import { useStateContext } from '../contexts/contextProvider';
