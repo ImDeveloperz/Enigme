@@ -23,7 +23,7 @@ const Docpage = () => {
   //   }
   return (
     <Layout>     
-              <ShowDocs />
+      <ShowDocs />
     </Layout>
   );
 };

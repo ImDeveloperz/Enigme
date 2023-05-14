@@ -92,7 +92,7 @@ const Sidbar = () => {
   }
 
   return (
-    <nav className='px-6 w-full flex justify-between   items-center  text-black  white-glassmorphism shadow-2xl  '>
+    <nav className='z-[1000] px-6 w-full flex justify-between   items-center  text-black  white-glassmorphism shadow-2xl  '>
       <div className='md:w-[15%] '>
         <Image src={logoLight} alt="" className='w-40 h-18' />
       </div>
@@ -135,12 +135,12 @@ const Sidbar = () => {
       </Popover>
      
       </div>
-      <div className=' z-10'>
+      <div className='  '>
          {toggleMenu ? <AiOutlineClose className='text-white md:hidden  right-0  cursor-pointer ' onClick={()=>setToggleMenu(false)}/> :
           <HiMenuAlt4  className='text-black md:hidden cursor-pointer w-8 h-6' onClick={()=>setToggleMenu(true)}/>}
           {toggleMenu ?
-          <ul className=' font-bold fixed top-0 bg-[#2546BD]  right-0 p-3 w-full h-[30rem] rounded-b-3xl shadow-2xl md:hidden liste-none
-            flex flex-col  animate-slide-in items-center gap-6 '>
+          <ul className=' font-bold fixed top-0 bg-[#2546BD] z-10 right-0 p-3 w-full h-[30rem] rounded-b-3xl shadow-2xl md:hidden liste-none
+            flex flex-col   items-center gap-6 '>
              <li className='text-xl w-full my-2'>
               <AiOutlineClose  className='absolute right-8 ' onClick={()=>setToggleMenu(false)}/>
              </li>

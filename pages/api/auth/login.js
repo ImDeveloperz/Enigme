@@ -4,11 +4,12 @@ import { sign } from "jsonwebtoken";
 // import mysql from 'mysql';
 import { db } from "../../../config/db"
 import { serialize } from "cookie";
+const secret = process.env.SECRET;
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { email, password } = req.body;
 
-  const secret = process.env.SECRET;
+  
   db.execute('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
       
       if (error) {

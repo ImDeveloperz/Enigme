@@ -171,7 +171,7 @@ export const SignIn = () => {
         {
           setUser(data.user);
           setToken(data.token);
-          router.push('/Docpage')
+          router.push('/Docpage');
         }
         setError(data.message)
       }).catch(err => {
