@@ -1,37 +1,40 @@
-import {Dropbox} from 'dropbox';
-
-const dbx = new Dropbox({ accessToken: 'sl.BeUhjGzmP-CiPZ2OUcG5Qdmc2AL9viGO6uez5mJsdYgrae2GqyeE9oktU2vBE5wlVvko6uNePtQdKWGHiv2rUk9XcO7ckIbl8ihmbPr-RLi7WZtayDd5u2OxMbGS3aboaYn1Kg5kPeTs' });
+import { Dropbox } from 'dropbox';
 
 export default async function handler(req, res) {
-  
-    try {
-      const response = await dbx.filesListFolder();
-      console.log('hhh',response);
+  const dbx = new Dropbox({
+    clientId: process.env.NEXT_PUBLIC_DROPBOX_API_KEY,
+    clientSecret: process.env.NEXT_PUBLIC_DROPBOX_API_SECRET,
+    accessToken: null,
+  });
 
-      const contents = response.entries;
-      console.log('hh',contents);
-      res.status(200).json(contents);
+  if (req.query.code) {
+    // This is a callback from the Dropbox authentication flow
+    const { code } = req.query;
+
+    try {
+      const response = await dbx.auth.getAccessTokenFromCode(
+        'http://localhost:3000/api/dropbox',
+        code 
+      );
+
+      dbx.setAccessToken(response.result.access_token);
+
+      res.redirect('http://localhost:3000/Docpage'); // Redirect to your app's homepage
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Something went hhh wrong' });
+      res.status(500).send('Error authenticating with Dropbox');
     }
+  } else {
+    // This is the initial request to start the Dropbox authentication flow
+    // const authUrl = dbx.auth.getAuthenticationUrl(
+    //   'http://localhost:3000/api/dropbox',
+    //   null,
+    //   'code',
+    //   'offline',
+    //   null,
+    //   'none'
+    // );
+
+    res.redirect('http://localhost:3000/api/dropbox');
   }
-  
-
-// async function listFolders(dbx, path) {
-//   try {
-//     const response = await dbx.filesListFolder();
-//     const contents = response.entries.filter(entry => entry[".tag"] === "folder");
-
-//     // If there are more items in the directory, recursively call this function
-//     if (response.has_more) {
-//       const moreContents = await listFolders(dbx, path);
-//       return [...contents, ...moreContents];
-//     }
-
-//     return contents;
-//   } catch (error) {
-//     console.error(error);
-//     throw new Error('Something went wrong');
-//   }
-// }
+}
