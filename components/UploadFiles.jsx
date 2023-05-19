@@ -41,9 +41,10 @@ const UploadFiles = () => {
     }
     const UploadFile = (file ) => {
         const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
-      setIsLoading(true)
+      
 
        if(file){
+        setIsLoading(true)
         dbx.filesUpload({path: '/' + file.name, contents: file})
         .then(function(response) {
           console.log(response);
@@ -55,7 +56,7 @@ const UploadFiles = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             })
           setFiles(null)
           setIsLoading(false)
@@ -100,7 +101,7 @@ const UploadFiles = () => {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme="dark" />
+            theme="light" />
         </div>
     )
 }
