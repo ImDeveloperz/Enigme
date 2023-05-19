@@ -8,7 +8,7 @@ import vide from '../images/vide.png';
 import Image from 'next/image';
 // import { data } from 'autoprefixer';
 
-const accessToken = "sl.BeqSeDBN2UbThmQErEhM2DfFkpIhSTiKVPJR3qSOryHPtVWBdpCa-j6cjLdwFmdhH9ZGQZJoEHQQeWOraGq7Bv6f-kfHURLXIRF6NmW7ukt3RjrB4O-KjNVzbOtGMDBKYQyYjLR5";
+const accessToken = "sl.Ber6ow-MBkHGpcmmKwbh4oIDbNIHXkvyrHLdXZkINt3VljxtoPk_cjEoZN37aMjBND43HNwSIMCEYpPvKX_e6fh9_nYJdjpDEf5MztPrckBzXVUjctdmYqNyyoCzGsjz8OrZ13DF";
 const ShowDocs = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [datac, setDatac] = useState([]);
