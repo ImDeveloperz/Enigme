@@ -1,9 +1,10 @@
 import React from 'react'
 import Layout from '@/components/Layout'
+import UploadFiles from '@/components/UploadFiles'
 const index = () => {
   return (
     <Layout>
-        upload your file here
+       <UploadFiles/>
     </Layout>
   )
 }

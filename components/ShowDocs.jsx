@@ -1,4 +1,4 @@
-// 'use-client'
+'use-client'
 import { Popover } from '@nextui-org/react'
 import React, { useState, useEffect } from 'react'
 import { Table } from "@nextui-org/react";
@@ -6,17 +6,17 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import axiosClient from '@/axios-client';
 import vide from '../images/vide.png';
 import Image from 'next/image';
-import { data } from 'autoprefixer';
+// import { data } from 'autoprefixer';
 
-const accessToken = "sl.BegEjuSfmI0w3SX-jcg5_IUJbF8-7Zgx2KGjA8EzgQNoT6XT_Td-YzcRxdqK9gaKZfaL510fDQqa8Nyf7AOrdRKfXYxxcC91vlZ1XEqFLDRKuSMaub9-E77DMLUzC4D5umIczvuL";
+const accessToken = "sl.BeqSeDBN2UbThmQErEhM2DfFkpIhSTiKVPJR3qSOryHPtVWBdpCa-j6cjLdwFmdhH9ZGQZJoEHQQeWOraGq7Bv6f-kfHURLXIRF6NmW7ukt3RjrB4O-KjNVzbOtGMDBKYQyYjLR5";
 const ShowDocs = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(true)
-  useEffect(() => {
-    setLoading(true)   
-
-    fetch("https://api.dropboxapi.com/2/files/list_folder", {
+  const [datac, setDatac] = useState([]);
+  const [loading, setLoading] = useState(false)
+  useEffect(()=>{
+    setLoading(true)
+    const apiGet = async()=>{   
+    const res =await fetch("https://api.dropboxapi.com/2/files/list_folder", {
       method: "POST",
       headers: {
         "Authorization": "Bearer " + accessToken,
@@ -30,16 +30,19 @@ const ShowDocs = () => {
         "include_has_explicit_shared_members": false,
         "include_mounted_folders": true,
         "limit": 1000 // Limitez le nombre de fichiers à récupérer si nécessaire
-      })
-    })
-      .then(response => response.json())
-      .then(data => {
-        setData(data.entries)
+      })})
+   
+    
+        const data= await res.json()
+        setDatac(data.entries)
         console.log(data.entries)
-        setLoading(false)   
-      })
-      .catch(error => console.error("Erreur :", error));
-  }, [data])
+        // data.entries.map((item)=>console.log(item))
+          console.log(datac)
+          setLoading(false) 
+    }
+    apiGet()
+  },[])
+  
   
   return (
     <div className='w-full  flex h-full '>
@@ -49,7 +52,7 @@ const ShowDocs = () => {
             Comptes
           </h1>
           <div className='items-end flex h-full ml-6 pb-4'>
-            <button className='p-2 px-4 bg-blue-700  text-white rounded-md flex justify-center items-center ' onClick={() => signIn()}>
+            <button className='p-2 px-4 bg-blue-700  text-white rounded-md flex justify-center items-center ' >
               Ajoute Compte
             </button>
           </div>
@@ -81,17 +84,17 @@ const ShowDocs = () => {
             <Table.Header>
               <Table.Column>NAME</Table.Column>
               <Table.Column>SIZE</Table.Column>
-              {/* <Table.Column>Type</Table.Column> */}
+              <Table.Column>Type</Table.Column>
             </Table.Header>
             <Table.Body>
               {
-              data?.forEach(file => {
+              datac?.map(file => {
                  return (
 
                     <Table.Row key={file.name}>
                       <Table.Cell>{file.name}</Table.Cell>
                       <Table.Cell>{file.size}</Table.Cell>
-                      {/* <Table.Cell>{file.tag}</Table.Cell> */}
+                      <Table.Cell>{file['.tag']}</Table.Cell>
                     </Table.Row>
 
                   )

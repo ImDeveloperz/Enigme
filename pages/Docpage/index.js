@@ -16,7 +16,7 @@ const Docpage = () => {
   //   }
   return (
     <Layout >
-        <Suspense fallback={<Loading/>} >
+      <Suspense fallback={<Loading/>} >
       <ShowDocs />
       </Suspense>
     </Layout>
