@@ -13,9 +13,9 @@ import Image from 'next/image';
 // import { Link } from 'react-router-dom'
 const About = () => {
   return (
-    <div className='my-40 w-full  items-center '>
+    <div className='my-36 w-full  items-center ' id="About">
       {/* <p className='text-7xl Font-bold pb-20 text-white '>About <span className='text-blue-600'>Us</span></p> */}
-      <div className='flex md:flex-row flex-col   md:p-10 px-4 '>
+      <div className='flex md:flex-row flex-col    px-4 '>
         <div className='md:w-[50%] flex w-full  relative  '>
           <Image src={ab3} alt="" className=' h-52 right-10  -top-14 absolute ' />
           <Image src={ab1} alt="" className='w-full md:w-[90%] ' />

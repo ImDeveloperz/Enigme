@@ -11,8 +11,8 @@ const connectUser =()=>{
 const Home = () => {
   const commonStyles = "min-h-[70px] w-full sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-semibold text-white";
   return (
-    <div className='flex w-full justify-start '>
-      <div className='flex md:flex-row flex-col items-start justify-start md:p-10 px-4'>
+    <div className='flex w-full justify-start ' id="Home" >
+      <div className='flex md:flex-row flex-col items-start justify-start md:p-6 px-4'>
         <div className='flex md:w-[50%] w-full justify-start flex-col py-6 md:mr-10'>
          
           <h1 className='text-3xl sm:text-4xl xl:text-5xl text-white  text-gradient py-1'>
