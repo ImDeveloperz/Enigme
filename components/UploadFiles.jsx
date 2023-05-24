@@ -22,7 +22,7 @@ export const IconFile = ({ type }) => {
         case 'docx': return (<BsFiletypeDocx />);
     }
 }
-const ACCESS_TOKEN = "sl.Be5N0MmhaNOSqJ4sCDhz5tCHbEpWBG6p6Y_viBBjK1Zb-r1hL7ECO5FKQftdqxsctc11QHXwhZiT4VOPqBtBADAB5XrZ-Z9VMo4d3StGSommcjCMeld56aLKugabnGcsXoH7DDr_";
+const ACCESS_TOKEN = "sl.Be56EeXvtyG33Sdk1VyTZkpNHpW4epyVv8IQwTqTIcUaq_Uj4is0XPJ82ib7BOawox0NXbXUgomVY334VaCSDmBLypwrQzWnWS1U2bDbrSGqrAVLnSRoWnbEHR6TEvmfiem5sKVD";
 
 
 

@@ -9,11 +9,19 @@ import { CiMenuKebab } from 'react-icons/ci';
 import { IconFile } from './UploadFiles';
 import vide from '../images/vide.png';
 import Image from 'next/image';
+import { Dropbox } from 'dropbox';
+import axios from 'axios'
+// import { DropboxFile } from 'dropbox/dist/dropbox-file';
+// import { DropboxFileMetadata } from 'dropbox/dist/dropbox-file-metadata';
+// import { DropboxFileMetadata } from 'dropbox/dist/dropbox-file-metadata';
+
+
 
 import { Dropdown } from "@nextui-org/react";
 // import { data } from 'autoprefixer';
-
-const accessToken = "sl.Be5N0MmhaNOSqJ4sCDhz5tCHbEpWBG6p6Y_viBBjK1Zb-r1hL7ECO5FKQftdqxsctc11QHXwhZiT4VOPqBtBADAB5XrZ-Z9VMo4d3StGSommcjCMeld56aLKugabnGcsXoH7DDr_"
+const clientId = "xr0fdcw09il66bs";
+const clientSecret= process.env.DROPBOX_CLIENT_SECRET;
+const accessToken = "sl.Be56EeXvtyG33Sdk1VyTZkpNHpW4epyVv8IQwTqTIcUaq_Uj4is0XPJ82ib7BOawox0NXbXUgomVY334VaCSDmBLypwrQzWnWS1U2bDbrSGqrAVLnSRoWnbEHR6TEvmfiem5sKVD"
 const ShowDocs = () => {
   let pip=0;
   const [selected, setSelected] = useState(new Set(["Comptes"]));
@@ -135,6 +143,34 @@ const ShowDocs = () => {
       })
 
   }
+
+  const Ajouter = async () => {
+    console.log(clientId)
+    var dbx = new Dropbox({ clientId: clientId});
+    try {
+      const authUrl =await dbx.auth.getAuthenticationUrl('http://localhost:3000/Docpage');
+      console.log(authUrl);
+    } catch (error) {
+      console.error('Error generating auth URL:', error);
+    }
+    // try {
+    //   const response = await axios.post('https://api.dropbox.com/oauth2/token', {
+    //     code: "authorizationCode",
+    //     grant_type: 'authorization_code',
+    //     redirect_uri: 'http://localhost:3000/Docpage',
+
+    //     client_id: clientId,
+    //     client_secret: clientSecret
+    //   });
+  
+      // Access token will be available in the response data
+    //   const accessToken = response.data.access_token;
+    // console.log(accessToken);
+    // } catch (error) {
+    //   console.log('Error exchanging authorization code for access token:', error);
+    //   return null;
+    // }
+    }
   return (
     <div className='w-full  flex h-full '>
       <div className='bg-gray-200 h-full w-[20%] text-white'>
@@ -179,7 +215,7 @@ const ShowDocs = () => {
                         {/* <Dropdown.Item key="edit"></Dropdown.Item> */}
                       </Dropdown.Menu>
                     </Dropdown>
-                    <button className='p-2 px-4 rounded-md  bg-blue-700 text-white text-md font-meduim '>
+                    <button className='p-2 px-4 rounded-md  bg-blue-700 text-white text-md font-meduim ' onClick={()=>Ajouter()}>
                       Ajouter
                     </button>
                   </div>
