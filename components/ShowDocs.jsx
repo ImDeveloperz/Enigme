@@ -18,11 +18,13 @@ import axios from 'axios'
 
 
 import { Dropdown } from "@nextui-org/react";
+import { useRouter } from 'next/router';
 // import { data } from 'autoprefixer';
 const clientId = "xr0fdcw09il66bs";
 const clientSecret= process.env.DROPBOX_CLIENT_SECRET;
 const accessToken = "sl.Be56EeXvtyG33Sdk1VyTZkpNHpW4epyVv8IQwTqTIcUaq_Uj4is0XPJ82ib7BOawox0NXbXUgomVY334VaCSDmBLypwrQzWnWS1U2bDbrSGqrAVLnSRoWnbEHR6TEvmfiem5sKVD"
 const ShowDocs = () => {
+  const router =useRouter()
   let pip=0;
   const [selected, setSelected] = useState(new Set(["Comptes"]));
   // const []
@@ -150,26 +152,11 @@ const ShowDocs = () => {
     try {
       const authUrl =await dbx.auth.getAuthenticationUrl('http://localhost:3000/Docpage');
       console.log(authUrl);
+      router.push(authUrl)
     } catch (error) {
       console.error('Error generating auth URL:', error);
     }
-    // try {
-    //   const response = await axios.post('https://api.dropbox.com/oauth2/token', {
-    //     code: "authorizationCode",
-    //     grant_type: 'authorization_code',
-    //     redirect_uri: 'http://localhost:3000/Docpage',
-
-    //     client_id: clientId,
-    //     client_secret: clientSecret
-    //   });
-  
-      // Access token will be available in the response data
-    //   const accessToken = response.data.access_token;
-    // console.log(accessToken);
-    // } catch (error) {
-    //   console.log('Error exchanging authorization code for access token:', error);
-    //   return null;
-    // }
+    
     }
   return (
     <div className='w-full  flex h-full '>
