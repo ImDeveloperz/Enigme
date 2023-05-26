@@ -8,6 +8,7 @@ import { Dropbox } from 'dropbox';
 import Loading from './loading/Loading';
 import Image from 'next/image'
 import SimpleLoad from './loading/SimpleLoad';
+import { useStateContext } from '@/utils/AuthContext';
 export const IconFile = ({ type }) => {
     switch (type) {
         case 'png': return (<BsFiletypePng />);
@@ -27,6 +28,8 @@ const ACCESS_TOKEN = "sl.Be56EeXvtyG33Sdk1VyTZkpNHpW4epyVv8IQwTqTIcUaq_Uj4is0XPJ
 
 
 const UploadFiles = () => {
+    const { tokenAccess, setTokenAccess } = useStateContext()
+
 
     const [isDragOver, setIsDragOver] = useState(false);
 
@@ -66,7 +69,7 @@ const UploadFiles = () => {
         console.log(files);
     };
     const UploadFile = (file) => {
-        const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
+        const dbx = new Dropbox({ accessToken: tokenAccess });
 
 
         if (file) {

@@ -14,10 +14,10 @@ import axios from 'axios'
 import { Dropdown } from "@nextui-org/react";
 import { useRouter } from 'next/router';
 import { useStateContext } from '@/utils/AuthContext';
+import SimpleLoad from './loading/SimpleLoad';
 const clientId = "xr0fdcw09il66bs";
 const ShowDocs = () => {
   const { tokenAccess, setTokenAccess } = useStateContext()
-  console.log(tokenAccess)
   const router = useRouter()
   let pip = 0;
   const [selected, setSelected] = useState(new Set(["Comptes"]));
@@ -51,13 +51,13 @@ const ShowDocs = () => {
       })
       const data = await res.json()
       setDatac(data.entries)
-      console.log(data.entries)
+
       // data.entries.map((item)=>console.log(item))
-      console.log(datac)
+  
       setLoading(false)
     }
     apiGet()
-  }, [pip, path])
+  }, [pip, path, tokenAccess])
 
   const apiGet = async () => {
     setLoading(true)
@@ -80,13 +80,12 @@ const ShowDocs = () => {
     })
     const data = await res.json()
     setDatac(data.entries)
-    console.log(data.entries)
+  
     // data.entries.map((item)=>console.log(item))
-    console.log(datac)
+  
     setLoading(false)
   }
   const dowload = async (name, path) => {
-    console.log("name : ", name, "path : ", path)
     const res = await fetch("https://content.dropboxapi.com/2/files/download", {
       method: "POST",
       headers: {
@@ -102,7 +101,6 @@ const ShowDocs = () => {
     link.click();
 
     URL.revokeObjectURL(link.href);
-    console.log(res)
   }
   const deleete = async (name, path) => {
     const res = await fetch("https://api.dropboxapi.com/2/files/delete_v2", {
@@ -131,6 +129,9 @@ const ShowDocs = () => {
 
   }
 
+  const retour = () => {
+   
+}
   const Layout = ({ children }) => {
     return (
       <div className='w-full  flex h-full '>
@@ -198,7 +199,6 @@ const ShowDocs = () => {
     var dbx = new Dropbox({ clientId: clientId });
     try {
       const authUrl = await dbx.auth.getAuthenticationUrl('http://localhost:3000/getToken');
-      console.log(authUrl);
       router.push(authUrl);
 
     } catch (error) {
@@ -206,15 +206,19 @@ const ShowDocs = () => {
     }
 
   }
+ 
   if (loading) {
     return (
       <Layout>
-        <div>Loading ...</div>
+        <div className='h-[80%]  items-center justify-center flex '>
+          <SimpleLoad/>
+        </div>
       </Layout>
     )
   }
   else {
-    if (datac) {
+    if (datac || path != "") {
+
       return (
         <Layout>
           <div className='w-full   bg-white  p-4'>
@@ -227,6 +231,27 @@ const ShowDocs = () => {
                 <Table.Column></Table.Column>
               </Table.Header>
               <Table.Body>
+                {path != '' &&(<Table.Row>
+                  <Table.Cell >
+                    <p className='text-xl font-extrabold cursor-pointer' onClick={()=>{
+                      console.log('before',path)
+                        if(path.includes("/")){
+                          let array= path.split("/")
+                          let length=array.length;
+                            setPath(array.slice(0,length-2).join("/"))
+                        }
+                        else{
+                          setPath("")
+                        }
+                        console.log('after',path)
+                    }} >
+                      ..
+                    </p>
+                  </Table.Cell>
+                  <Table.Cell></Table.Cell>
+                  <Table.Cell></Table.Cell>
+                  <Table.Cell></Table.Cell>
+                </Table.Row>)}
                 {
                   datac?.map(file => {
                     if (file['.tag'] == 'file') {
@@ -262,7 +287,7 @@ const ShowDocs = () => {
                     return (
                       (<Table.Row key={file.name}>
                         <Table.Cell>{IconFile(file.name.split('.').pop())} {file.name}</Table.Cell>
-                        <Table.Cell>{file.size}</Table.Cell>
+                        <Table.Cell>__</Table.Cell>
                         <Table.Cell>{file['.tag']}</Table.Cell>
                         <Table.Cell>
                           <button onClick={() => setPath(path + file.path_display)}>
@@ -295,13 +320,13 @@ const ShowDocs = () => {
   return (
     <Layout>
       <div className='flex flex-col justify-center items-center h-[80%]  gap-8 '>
-        <Image src={vide} className='w-40 h-40' />
-        <div className='flex justify-center items-center ' >
-          <p className='text-md font-meduim  '>Aucun fichier a afficher pour le moment </p>
-          <button onClick={() => Ajouter()}>
+        <Image src={vide} className='w-60 h-40' />
+        <div className='flex justify-center items-center  flex-col gep-6' >
+          <p className='text-md font-light '>Aucun fichier a afficher pour le moment </p>
+          <button className='p-2 px-4 bg-blue-700 hover:bg-blue-500 text-md font-meduim text-white rounded-md' onClick={() => Ajouter()}>
             Refresh Token
           </button>
-           </div>
+        </div>
       </div>
     </Layout>
   )

@@ -22,10 +22,9 @@ const getToken = () => {
 }
     getTokeen();
   return (
-    <div>
-
-       clicker ici pour le rediriger vers l'application
-        <button onClick={()=>{router.push('http://localhost:3000/Docpage')}}>
+    <div className='flex flex-col justify-center items-center '>
+        <p className='text-md font-medium text-center'>Votre compte a ete bien Enregistrer</p>
+        <button className='p-2 px-4 bg-blue-700 hover:bg-blue-500 text-md font-meduim text-white' onClick={()=>{router.push('http://localhost:3000/Docpage')}}>
             Retour
         </button>
     </div>
