@@ -15,7 +15,7 @@ const Parametres = () => {
        }
        fetch()
        
-    },[])
+    },[comptesType])
   return (
     <div className='flex w-full h-full flex-col justify-center items-center text-white'>
          <div className='shadow-xl rounded-md bg-[#18181B] w-[60%] py-6 px-10'>
@@ -25,7 +25,7 @@ const Parametres = () => {
           <div className='flex flex-col items-cente gap-4 px-4 w-full'>
                 {comptesType?.map((type)=>{
                    return  (
-                      <div className='shadow-2xl rouded-md py-4 px-8 flex justify-between items-center'>
+                      <div key={type.typeCompte_name} className='shadow-2xl rouded-md py-4 px-8 flex justify-between items-center'>
                             <p>
                               {type.typeCompte_name}
                             </p>

@@ -19,13 +19,20 @@ import { deleete, dowload } from './helper/functions';
 import { decryptFile, processFile } from './helper/cryptage';
 
 const clientId = "xr0fdcw09il66bs";
+console.log("ren ren bera")
 
 const ShowDocs = () => {
+  const [length,setLength]=useState()
+  function getLength(filename){
+     const array = filename.split('.')
+     return array.length
+  }
   const { tokenAccess, user } = useStateContext()
   const nomref = useRef()
   const [comptes, setComptes] = useState([]);
   useEffect(() => {
     const getComptes = async () => {
+      console.log('user : ',user)
       const userId = user?.id_User
       try {
         const { data } = await axiosClient.post('/ajouter/selectComptes', userId);
@@ -119,7 +126,7 @@ const ShowDocs = () => {
             <div className='border rounded-lg flex flex-col gap-4'>
               {comptes?.map((compte) => {
                 return (
-                  <div className='flex gap-6 px-4 py-2 rounded-lg hover:bg-slate-400 text-black items-center justify-center'>
+                  <div key={compte.nomCompte+compte.typeCompte_id} className='flex gap-6 px-4 py-2 rounded-lg hover:bg-slate-400 text-black items-center justify-center'>
                     <p>{compte.nomCompte}</p>
                     {compte.typeCompte_id == 0 ? <BsDropbox /> : <DiGoogleDrive />}
                   </div>
@@ -281,7 +288,8 @@ const ShowDocs = () => {
                 </Table.Row>)}
                 {
                   datac?.map(file => {
-                    if (file['.tag'] == 'file') {
+                    if (file['.tag'] == 'file') {            
+                        let len = getLength(file.name);
                       return (
                         <Table.Row key={file.name}>
                           <Table.Cell>{IconFile(file.name.split('.').pop())} {file.name}</Table.Cell>
@@ -311,17 +319,22 @@ const ShowDocs = () => {
                                       Supprimer
                                     </p>
                                     <p className='hover:text-blue-700 cursor-pointer' onClick={() => {
-                                      if(crypte!='crypter'){
+                                      const name = file.name;
+                                      const array = name.split(".");
+                                      if(len==3){
                                         decryptFile(file.name, file.path_display, tokenAccess)
-                                        setCrypte('crypter')
                                       }else{
                                         processFile(file.name, file.path_display, tokenAccess)
-                                        setCrypte('decrypter')
                                       }
                                       
                                      setTimeout(()=>{ apiGet()},15000)
                                     }} >
-                                      {crypte}
+                                      {
+                                        len==3?
+                                        'Decrypter':
+                                        'Crypter'
+                                                                              
+                                      }
                                     </p>
                                   </div>
                                 </Popover.Content>

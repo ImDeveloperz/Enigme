@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ToastContainer } from "react-toastify";
 
-function page() {
+function Page() {
   const nomref = useRef();
   const typeRef = useRef();
   const [isCrypted, setIsCrypted] = useState();
@@ -370,4 +370,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

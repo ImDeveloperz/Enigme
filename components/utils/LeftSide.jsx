@@ -21,8 +21,8 @@ const LeftSide = () => {
         <div className=''>
             <Fade left>
             <p>
-                "Store your favorite files and folders,<br/> share them  with your collaborators,<br/>
-                 and work on them from your computer device."
+            &quot;Store your favorite files and folders,<br/> share them  with your collaborators,<br/>
+                 and work on them from your computer device.&quot;
             </p>
             </Fade>
         </div>

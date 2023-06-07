@@ -98,7 +98,7 @@ const Sidbar = () => {
       </div>
       <ul className='md:flex hidden flex-3 flex-row gap-4 text-2xl  justify-center'>
         {listeBar.map((item, index) => {
-          return (<Link href={item.Link} >
+          return (<Link key={item.Link} href={item.Link} >
             <div key={item.text + index} className='flex gap-4 cursor-pointer p-2 hover:border-b-indigo-500 dark:hover:bg-gray-800 items-center justify-start '>
               <Li item={item.text} active={location.pathname==item.Link} />
             </div>
@@ -150,7 +150,7 @@ const Sidbar = () => {
               <AiOutlineClose  className='absolute right-8 ' onClick={()=>setToggleMenu(false)}/>
              </li>
              {listeBar.map((item, index) => {
-          return (<Link href={item.Link} >
+          return (<Link key={item.Link} href={item.Link} >
             <div key={item.text + index} className='flex gap-4 cursor-pointer hover:border-b-4  p-2 hover:border-b-indigo-500 dark:hover:bg-gray-800 items-center justify-start '>
               <Li item={item.text} />
             </div>

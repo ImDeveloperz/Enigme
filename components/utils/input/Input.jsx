@@ -5,14 +5,15 @@ import { AiOutlineCheckSquare ,AiFillCheckSquare } from 'react-icons/ai';
 import Link from 'next/link';
 
 
-export const Input = forwardRef(({type,placeholder,icon},ref) => {
-  return (
+export const Input = forwardRef(function Input({ type, placeholder, icon }, ref) {
+    return (
     <div className='relative flex items-center'>
         <input ref={ref} type={type} name={type} className='pl-10 my-2 w-full  p-2 outline-none bg-transparent text-white text-sm border rounded-md  ' placeholder={placeholder} />
         {icon}
     </div>
     )
 })
+Input.displayName = 'Input';
 export const InputCheck =({body})=>{
     const [isCheked,setIsChecked]=useState(false);
   const handleCheck = () => {

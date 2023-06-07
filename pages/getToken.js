@@ -3,7 +3,7 @@ import { useStateContext } from '@/utils/AuthContext';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
 
-const getToken = () => {
+const GetToken = () => {
     const { tokenAccess, setTokenAccess } = useStateContext()
     const router = useRouter();
     const getTokeen=()=>{
@@ -31,4 +31,4 @@ const getToken = () => {
   )
 }
 
-export default getToken
+export default GetToken
