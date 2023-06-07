@@ -1,8 +1,7 @@
 'use-client'
-import { Popover, Text } from '@nextui-org/react'
-import React, { useState, useEffect, useMemo } from 'react'
+import { Input, Popover } from '@nextui-org/react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { Table } from "@nextui-org/react";
-import { useSession, signIn, signOut } from 'next-auth/react';
 import axiosClient from '@/axios-client';
 import { ToastContainer, toast } from 'react-toastify';
 import { CiMenuKebab } from 'react-icons/ci';
@@ -10,25 +9,54 @@ import { IconFile } from './UploadFiles';
 import vide from '../images/vide.png';
 import Image from 'next/image';
 import { Dropbox } from 'dropbox';
-import axios from 'axios'
 import { Dropdown } from "@nextui-org/react";
 import { useRouter } from 'next/router';
 import { useStateContext } from '@/utils/AuthContext';
 import SimpleLoad from './loading/SimpleLoad';
+import { BsDropbox } from 'react-icons/bs';
+import { DiGoogleDrive } from 'react-icons/di';
+import { deleete, dowload } from './helper/functions';
+import { decryptFile, processFile } from './helper/cryptage';
+
 const clientId = "xr0fdcw09il66bs";
+
 const ShowDocs = () => {
-  const { tokenAccess, setTokenAccess } = useStateContext()
+  const { tokenAccess, user } = useStateContext()
+  const nomref = useRef()
+  const [comptes, setComptes] = useState([]);
+  useEffect(() => {
+    const getComptes = async () => {
+      const userId = user?.id_User
+      try {
+        const { data } = await axiosClient.post('/ajouter/selectComptes', userId);
+        if (data.compte) {
+          setComptes(data.compte);
+        }
+      } catch (error) {
+        console.log(error);
+        if (error.response && error.response.status === 422) {
+          console.log(error.response);
+        }
+      }
+    }
+    getComptes()
+  }, [user])
   const router = useRouter()
   let pip = 0;
   const [selected, setSelected] = useState(new Set(["Comptes"]));
   // const []
+  const [selectedC, setSelectedC] = useState(new Set(["crptage"]));
   const selectedValue = useMemo(
     () => Array.from(selected).join(", ").replaceAll("_", " "),
     [selected]
   );
-  const [isOpen, setIsOpen] = useState(false)
+  const typeCryptage = useMemo(
+    () => Array.from(selectedC).join(", ").replaceAll("_", " "),
+    [selectedC]
+  );
   const [datac, setDatac] = useState([]);
   const [loading, setLoading] = useState(false)
+  const [active, setActive] = useState(false)
   const [path, setPath] = useState("")
   useEffect(() => {
     setLoading(true)
@@ -40,7 +68,7 @@ const ShowDocs = () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          "path": path, // Spécifiez le chemin vers votre dossier
+          "path": "" + path, // Spécifiez le chemin vers votre dossier
           "recursive": false,
           "include_media_info": false,
           "include_deleted": false,
@@ -51,9 +79,6 @@ const ShowDocs = () => {
       })
       const data = await res.json()
       setDatac(data.entries)
-
-      // data.entries.map((item)=>console.log(item))
-  
       setLoading(false)
     }
     apiGet()
@@ -69,7 +94,7 @@ const ShowDocs = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        "path": "", // Spécifiez le chemin vers votre dossier
+        "path": "" + path, // Spécifiez le chemin vers votre dossier
         "recursive": false,
         "include_media_info": false,
         "include_deleted": false,
@@ -80,149 +105,153 @@ const ShowDocs = () => {
     })
     const data = await res.json()
     setDatac(data.entries)
-  
-    // data.entries.map((item)=>console.log(item))
-  
     setLoading(false)
   }
-  const dowload = async (name, path) => {
-    const res = await fetch("https://content.dropboxapi.com/2/files/download", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + tokenAccess,
-        "Dropbox-API-Arg": JSON.stringify({ "path": "" + path })
-      },
-    })
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(await res.blob());
-    link.download = name;
 
-    // Programmatically triggering the download
-    link.click();
-
-    URL.revokeObjectURL(link.href);
-  }
-  const deleete = async (name, path) => {
-    const res = await fetch("https://api.dropboxapi.com/2/files/delete_v2", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + tokenAccess,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "path": path,
-
-      })
-    })
-    console.log(res)
-    apiGet();
-    toast("Le fichier " + name + " Bien Supprimer !!!", {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    })
-
-  }
-
-  const retour = () => {
-   
-}
   const Layout = ({ children }) => {
     return (
-      <div className='w-full  flex h-full '>
+      <div className='w-full  flex h-full'>
         <div className='bg-gray-200 h-full w-[20%] text-white'>
-          <div className='flex ml-4 flex-col justify-between h-full '>
+          <div className='flex items-center flex-col gap-8 h-full '>
             <h1 className='text-black p-4 pt-8'>
               Comptes
             </h1>
+            <div className='border rounded-lg flex flex-col gap-4'>
+              {comptes?.map((compte) => {
+                return (
+                  <div className='flex gap-6 px-4 py-2 rounded-lg hover:bg-slate-400 text-black items-center justify-center'>
+                    <p>{compte.nomCompte}</p>
+                    {compte.typeCompte_id == 0 ? <BsDropbox /> : <DiGoogleDrive />}
+                  </div>
+                )
+              })}
 
+            </div>
           </div>
         </div>
         <div className='w-[80%]'>
           <div className='w-full items-center flex justify-between  bg-gray-200 p-4 shadow-md '>
             <p>Mes documments</p>
-            <div className='items-end flex h-full  ml-6 pb-4'>
-              <Popover placement='top-left' css={{ w: "800" }}>
-                <Popover.Trigger>
-                  <button className='p-2 px-4 bg-blue-700  text-white rounded-md flex justify-center items-center ' >
-                    Ajoute Compte
-                  </button>
-                </Popover.Trigger>
-                <Popover.Content>
-                  <Text css={{ p: "$10" }}>
-                    <div className='w-[300px] flex justify-center items-center'>
-                      <p className='text-md font-medium  '> Choisir le type du Compte</p>
-                    </div>
-                    <div className='pt-8 w-[300px] flex flex-col gap-8 justify-center items-center'>
-                      <Dropdown>
-                        <Dropdown.Button flat>
-                          <div className='text-md flex items-center justify-center w-[100px] '>
-                            {selectedValue}
-                          </div>
-                        </Dropdown.Button>
-                        <Dropdown.Menu aria-label="Single selection actions"
-                          color="primary"
-                          disallowEmptySelection
-                          selectionMode="single"
-                          selectedKeys={selected}
-                          onSelectionChange={setSelected}
-                        >
-                          <Dropdown.Item key="Dropbox">Dropbox</Dropdown.Item>
-                          <Dropdown.Item key="Google Drive">Google Drive</Dropdown.Item>
-                          {/* <Dropdown.Item key="edit"></Dropdown.Item> */}
-                        </Dropdown.Menu>
-                      </Dropdown>
-                      <button className='p-2 px-4 rounded-md  bg-blue-700 text-white text-md font-meduim ' onClick={() => Ajouter()}>
-                        Ajouter
-                      </button>
-                    </div>
-                  </Text>
+            <div className='items-end flex h-full  ml-6 pb-4 relative'>
 
-                </Popover.Content>
-              </Popover>
+              <button className={`p-2 px-4 bg-blue-700  text-white rounded-md flex justify-center items-center ${active ? 'hidden' : 'flex'}`} onClick={() => {
 
+                setActive(true)
+              }}>
+                Ajoute Compte
+              </button>
+              <div className={` ${active ? 'flex flex-col z-[1000] rounded-xl p-10 absolute top-0 right-0 bg-white shadow-lg' : 'hidden'}`}>
+                <div className='w-[300px] flex justify-center flex-col items-center'>
+                  <p className='text-md font-medium  '> Choisir le type du Compte</p>
+                </div>
+                <div className='pt-8 w-[300px] flex flex-col gap-8 justify-center items-center'>
+                  <Dropdown>
+                    <Dropdown.Button flat>
+                      <div className='text-md flex items-center justify-center w-[100px] '>
+                        {selectedValue}
+                      </div>
+                    </Dropdown.Button>
+                    <Dropdown.Menu aria-label="Single selection actions"
+                      color="primary"
+                      disallowEmptySelection
+                      selectionMode="single"
+                      selectedKeys={selected}
+                      onSelectionChange={setSelected}
+                    >
+                      <Dropdown.Item key="Dropbox">Dropbox</Dropdown.Item>
+                      <Dropdown.Item key="Google Drive">Google Drive</Dropdown.Item>
+                      {/* <Dropdown.Item key="edit"></Dropdown.Item> */}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  <div className='w-[300px] flex justify-center flex-col items-center'>
+                    <p className='text-md font-medium  '> Choisir le type du Cryptage</p>
+                  </div>
+                  <Dropdown>
+                    <Dropdown.Button flat>
+                      <div className='text-md flex items-center justify-center w-[100px] '>
+                        {typeCryptage}
+                      </div>
+                    </Dropdown.Button>
+                    <Dropdown.Menu aria-label="Single selection actions"
+                      color="primary"
+                      disallowEmptySelection
+                      selectionMode="single"
+                      selectedKeys={selectedC}
+                      onSelectionChange={setSelectedC}
+                    >
+                      <Dropdown.Item key="AES">AES</Dropdown.Item>
+                      <Dropdown.Item key="Blowfish">Blowfish</Dropdown.Item>
+                      {/* <Dropdown.Item key="edit"></Dropdown.Item> */}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  <Input
+                    label="Nom"
+                    type="text"
+                    ref={nomref}
+                  />
+                  <div className='flex gap-6'>
+                    <button className='p-2 px-4 rounded-md  border-blue-700 border text-black text-md font-meduim' onClick={() => {
+                      setActive(false)
+                    }}>
+                      Annuler
+                    </button>
+                    <button className='p-2 px-4 rounded-md  bg-blue-700 text-white text-md font-meduim ' onClick={() => {
+                      setActive(false)
+                      Ajouter()
+                    }}>
+                      Ajouter
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           {children}
         </div>
 
-      </div>
+      </div >
     )
   }
+  const [crypte,setCrypte]=useState('crypter')
   const Ajouter = async () => {
-    console.log(clientId)
+    const nom = nomref.current.value
+    let typeCompte = 0;
+    if (selectedValue == "Google Drive") typeCompte = 1;
+    let typeCrypte = 0;
+    if (typeCryptage == "Blowfish") typeCrypte = 1;
+    const userId = user.id_User
+    axiosClient.post('/ajouter/ajouterCompte', { nom, typeCompte, typeCrypte, userId }).then(({ data }) => {
+      setComptes(data.compte)
+    }).catch(err => {
+      console.log(err)
+      const response = err.response;
+      if (response && response.status == 422) {
+        console.log(response)
+      }
+    });
     var dbx = new Dropbox({ clientId: clientId });
     try {
-      const authUrl = await dbx.auth.getAuthenticationUrl('http://localhost:3000/getToken');
+      const authUrl = await dbx.auth.getAuthenticationUrl('http://localhost:3000/getToken', 'code');
       router.push(authUrl);
 
     } catch (error) {
       console.error('Error generating auth URL:', error);
     }
-
   }
- 
   if (loading) {
     return (
       <Layout>
         <div className='h-[80%]  items-center justify-center flex '>
-          <SimpleLoad/>
+          <SimpleLoad />
         </div>
       </Layout>
     )
   }
   else {
     if (datac || path != "") {
-
       return (
         <Layout>
           <div className='w-full   bg-white  p-4'>
-
             <Table aria-label="Mes Docs" css={{ height: "auto", minWidth: "100%" }}>
               <Table.Header>
                 <Table.Column>NAME</Table.Column>
@@ -231,19 +260,17 @@ const ShowDocs = () => {
                 <Table.Column></Table.Column>
               </Table.Header>
               <Table.Body>
-                {path != '' &&(<Table.Row>
+                {path != '' && (<Table.Row>
                   <Table.Cell >
-                    <p className='text-xl font-extrabold cursor-pointer' onClick={()=>{
-                      console.log('before',path)
-                        if(path.includes("/")){
-                          let array= path.split("/")
-                          let length=array.length;
-                            setPath(array.slice(0,length-2).join("/"))
-                        }
-                        else{
-                          setPath("")
-                        }
-                        console.log('after',path)
+                    <p className='text-xl font-extrabold cursor-pointer' onClick={() => {
+                      if (path.includes("/")) {
+                        let array = path.split("/")
+                        let length = array.length;
+                        setPath(array.slice(0, length - 1).join("/"))
+                      }
+                      else {
+                        setPath("")
+                      }
                     }} >
                       ..
                     </p>
@@ -270,11 +297,31 @@ const ShowDocs = () => {
                                 </Popover.Trigger>
                                 <Popover.Content>
                                   <div className='p-4 px-6  flex flex-col gap-4 text-sm font-meduim'>
-                                    <p className='hover:text-blue-700' onClick={() => dowload(file.name, file.path_display)}>
+                                    <p className='hover:text-blue-700 cursor-pointer' onClick={() => {
+                                      dowload(file.name, file.path_display, tokenAccess)
+
+                                    }}>
                                       Telecharger
                                     </p>
-                                    <p className='hover:text-blue-700' onClick={() => deleete(file.name, file.path_display)}>
+                                    <p className='hover:text-blue-700 cursor-pointer' onClick={() => {
+                                      deleete(file.name, file.path_display, tokenAccess)
+                                      setTimeout(()=>{ apiGet()},3000)
+                                    }
+                                    }>
                                       Supprimer
+                                    </p>
+                                    <p className='hover:text-blue-700 cursor-pointer' onClick={() => {
+                                      if(crypte!='crypter'){
+                                        decryptFile(file.name, file.path_display, tokenAccess)
+                                        setCrypte('crypter')
+                                      }else{
+                                        processFile(file.name, file.path_display, tokenAccess)
+                                        setCrypte('decrypter')
+                                      }
+                                      
+                                     setTimeout(()=>{ apiGet()},15000)
+                                    }} >
+                                      {crypte}
                                     </p>
                                   </div>
                                 </Popover.Content>
@@ -290,7 +337,11 @@ const ShowDocs = () => {
                         <Table.Cell>__</Table.Cell>
                         <Table.Cell>{file['.tag']}</Table.Cell>
                         <Table.Cell>
-                          <button onClick={() => setPath(path + file.path_display)}>
+                          <button onClick={() => {
+                            setPath(file.path_display)
+                            console.log('path', path)
+                          }}>
+
                             Consulter
                           </button>
                         </Table.Cell>
@@ -299,7 +350,6 @@ const ShowDocs = () => {
                   })
                 }
               </Table.Body>
-
             </Table>
             <ToastContainer
               position="bottom-left"
@@ -331,6 +381,4 @@ const ShowDocs = () => {
     </Layout>
   )
 }
-
-
 export default ShowDocs

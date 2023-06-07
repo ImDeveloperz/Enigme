@@ -3,7 +3,7 @@ import { RiAccountBoxFill } from 'react-icons/ri'
 import { FaCalendar } from 'react-icons/fa'
 import { SiFiles } from 'react-icons/si'
 import logoLight from '../images/logoLight.png'
-import { Popover, Button, Text, Grid } from "@nextui-org/react";
+import { Popover, Button, Text, Grid ,Avatar} from "@nextui-org/react";
 import { CgProfile } from "react-icons/cg";
 import { MdLogout } from "react-icons/md";
 import { AuthContext, useStateContext } from '../utils/AuthContext';
@@ -17,9 +17,9 @@ import { useRouter } from 'next/router';
 
 
 
-const Li = ({ item }) => {
+const Li = ({ item,active }) => {
   return (
-    <li className='text-sm font-semibold '>
+    <li className={`text-sm font-semibold ${active && 'pb-4 border-b-2 border-blue-700'}`} >
       {item}
     </li>
   )
@@ -54,7 +54,7 @@ const Sidbar = () => {
 
     const [isOpen, setIsOpen] = useState(false);
   const listeBar = [{
-    Link: "./",
+    Link: "/Docpage",
     icon: <SiFiles className='' fontSize={20} />,
     text: "Mes documment"
   }, {
@@ -62,10 +62,10 @@ const Sidbar = () => {
     icon: <FaCalendar className='cursor-pointer' fontSize={20} />,
     text: "Charger documment"
   }, {
-    Link: "/Docpage/dowloadFiles",
+    Link: "/Docpage/ajouterParametre",
     icon: <SiFiles className='' fontSize={20} />,
-    text: "Telecharger documment"
-  },
+    text: "Gerer parametre compte"
+  }
   // {
   //   Link: "./Profile",
   //   icon: <RiAccountBoxFill fontSize={24} />,
@@ -90,7 +90,7 @@ const Sidbar = () => {
     //     setToken(null)
     //   })
   }
-
+  const location=useRouter()
   return (
     <nav className='z-[1000] px-6 w-full flex justify-between   items-center  text-black  white-glassmorphism shadow-2xl  '>
       <div className='md:w-[15%] '>
@@ -99,9 +99,8 @@ const Sidbar = () => {
       <ul className='md:flex hidden flex-3 flex-row gap-4 text-2xl  justify-center'>
         {listeBar.map((item, index) => {
           return (<Link href={item.Link} >
-            <div key={item.text + index} className='flex gap-4 cursor-pointer hover:border-b-4  p-2 hover:border-b-indigo-500 dark:hover:bg-gray-800 items-center justify-start '>
-
-              <Li item={item.text} />
+            <div key={item.text + index} className='flex gap-4 cursor-pointer p-2 hover:border-b-indigo-500 dark:hover:bg-gray-800 items-center justify-start '>
+              <Li item={item.text} active={location.pathname==item.Link} />
             </div>
           </Link>)
         })}
@@ -111,7 +110,13 @@ const Sidbar = () => {
       <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
         <Popover.Trigger>
           <div className="w-20 justify-center flex">
-            <CgProfile fontSize={30} className="text-black cursor-pointer" />
+             {
+              user?.image ?
+              (<Avatar src={user?.image} size='lg' color="primary"
+              bordered />)
+              : (<CgProfile fontSize={30} className="text-black cursor-pointer" />
+)
+             }
           </div>
         </Popover.Trigger>
         <Popover.Content>
@@ -147,7 +152,6 @@ const Sidbar = () => {
              {listeBar.map((item, index) => {
           return (<Link href={item.Link} >
             <div key={item.text + index} className='flex gap-4 cursor-pointer hover:border-b-4  p-2 hover:border-b-indigo-500 dark:hover:bg-gray-800 items-center justify-start '>
-
               <Li item={item.text} />
             </div>
           </Link>)

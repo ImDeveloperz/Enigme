@@ -88,6 +88,7 @@ export const SignUp = () => {
           <div className="flex gap-4 w-full ">
             <div className="w-[50%]">
             <Input
+            
               label="Nom"
               type="text"
               ref={nomref}

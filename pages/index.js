@@ -19,7 +19,7 @@ const Homepage = () => {
    if(isLoading) return (<Loading/>)
    return(
    <main className="w-full bg-[#090913] ">
-   <div className=' w-full'>
+   <div className=' w-full' id="Home" >
      <Navbar />
      <Home />
    </div>

@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { sign } from "jsonwebtoken";
 
 import { db } from "../../../config/db"
 const secret = process.env.SECRET;

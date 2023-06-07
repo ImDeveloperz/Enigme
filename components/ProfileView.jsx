@@ -26,7 +26,7 @@ const ProfileView = ({ id }) => {
     <div className='p-4 flex flex-col gap-10 text-black'>
       <div className='flex items-center gap-8 text-sm font-semibold shadow-xl rounded-xl border p-8'>
         {isLoading ? <Skeleton classes="profile-circle"/> :
-                 <Image src={avatar} alt="" className='w-[12rem] h-[11.5rem]' />
+                 <Image src={user?.image ? user?.image : avatar} alt="profile" className='rounded-[100%] border-2 border-blue-700 w-[10rem] h-[10rem]' width="200" height="200" />
         }
         
         <div className='flex flex-col gap-4  w-full '>
@@ -72,7 +72,7 @@ const ProfileView = ({ id }) => {
           type="submit"
           className="rounded-md md:w-[15%] w-[25%] bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-           <Link href={'/docs/user/' + user.id}> Modifier Votre Profile</Link>
+           <Link href={'/Docpage/profileView/user/' + user?.id_User}> Modifier Votre Profile</Link>
         </button>
       </div>
     </div>
