@@ -236,14 +236,14 @@ const ShowDocs = () => {
         console.log(response)
       }
     });
-    var dbx = new Dropbox({ clientId: clientId });
-    try {
-      const authUrl = await dbx.auth.getAuthenticationUrl('http://localhost:3000/getToken', 'code');
-      router.push(authUrl);
+    // var dbx = new Dropbox({ clientId: clientId });
+    // try {
+    //   const authUrl = await dbx.auth.getAuthenticationUrl('http://localhost:3000/getToken', 'code');
+    //   router.push(authUrl);
 
-    } catch (error) {
-      console.error('Error generating auth URL:', error);
-    }
+    // } catch (error) {
+    //   console.error('Error generating auth URL:', error);
+    // }
   }
   if (loading) {
     return (
