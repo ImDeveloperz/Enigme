@@ -56,16 +56,26 @@ const Sidbar = () => {
   const listeBar = [{
     Link: "./",
     icon: <SiFiles className='' fontSize={20} />,
-    text: "Mes documment"
+    text: "Mes documment",
+    role:0
   }, {
     Link: "/Docpage/uploadFiles",
     icon: <FaCalendar className='cursor-pointer' fontSize={20} />,
-    text: "Charger documment"
+    text: "Charger documment",
+    role:0
   }, {
     Link: "/Docpage/dowloadFiles",
     icon: <SiFiles className='' fontSize={20} />,
-    text: "Telecharger documment"
+    text: "Gerer parametre compte",
+    role:1
   },
+  {
+    Link: "/Docpage/Users",
+    icon: <SiFiles className='' fontSize={20} />,
+    text: "Gestion des utilisateur",
+    role:1
+  }
+
   // {
   //   Link: "./Profile",
   //   icon: <RiAccountBoxFill fontSize={24} />,
@@ -92,22 +102,24 @@ const Sidbar = () => {
   }
 
   return (
-    <nav className='z-[1000] px-6 w-full flex justify-between   items-center  text-black  white-glassmorphism shadow-2xl  '>
+    <nav className='z-[1000] px-6 w-full flex justify-between items-center  text-black  white-glassmorphism shadow-2xl  '>
       <div className='md:w-[15%] '>
         <Image src={logoLight} alt="" className='w-40 h-18' />
       </div>
-      <ul className='md:flex hidden flex-3 flex-row gap-4 text-2xl  justify-center'>
+       <ul className='md:flex hidden  flex-row gap-4 text-2xl  justify-center '>
         {listeBar.map((item, index) => {
-          return (<Link href={item.Link} >
-            <div key={item.text + index} className='flex gap-4 cursor-pointer hover:border-b-4  p-2 hover:border-b-indigo-500 dark:hover:bg-gray-800 items-center justify-start '>
 
-              <Li item={item.text} />
+        if(item.role==user?.role){
+          return (<Link key={item.Link} href={item.Link} >
+            <div key={item.text + index} className='flex gap-4 cursor-pointer p-2 hover:border-b-indigo-500 dark:hover:bg-gray-800 items-center justify-start '>
+              <Li item={item.text} active={location.pathname==item.Link} />
             </div>
           </Link>)
+          }
+          else return null
         })}
-        <Administration role='1' />
       </ul>
-      <div className=''>
+      <div className='px-4'>
       <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
         <Popover.Trigger>
           <div className="w-20 justify-center flex">
@@ -135,7 +147,8 @@ const Sidbar = () => {
       </Popover>
      
       </div>
-      <div className='  '>
+
+      <div className=' md:hidden '>
          {toggleMenu ? <AiOutlineClose className='text-white md:hidden  right-0  cursor-pointer ' onClick={()=>setToggleMenu(false)}/> :
           <HiMenuAlt4  className='text-black md:hidden cursor-pointer w-8 h-6' onClick={()=>setToggleMenu(true)}/>}
           {toggleMenu ?
@@ -145,12 +158,17 @@ const Sidbar = () => {
               <AiOutlineClose  className='absolute right-8 ' onClick={()=>setToggleMenu(false)}/>
              </li>
              {listeBar.map((item, index) => {
-          return (<Link href={item.Link} >
+
+              if(item.role==user?.role){
+          return (<Link key={item.Link} href={item.Link} >
             <div key={item.text + index} className='flex gap-4 cursor-pointer hover:border-b-4  p-2 hover:border-b-indigo-500 dark:hover:bg-gray-800 items-center justify-start '>
 
               <Li item={item.text} />
             </div>
           </Link>)
+          }else{ 
+            return null
+            }
         })}
                </ul>
              : null}
