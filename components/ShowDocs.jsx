@@ -236,14 +236,17 @@ const ShowDocs = () => {
         console.log(response)
       }
     });
-    // var dbx = new Dropbox({ clientId: clientId });
-    // try {
-    //   const authUrl = await dbx.auth.getAuthenticationUrl('http://localhost:3000/getToken', 'code');
-    //   router.push(authUrl);
+ getToken()
+  }
+ async function getToken(){
+    var dbx = new Dropbox({ clientId: clientId });
+    try {
+      const authUrl = await dbx.auth.getAuthenticationUrl('http://localhost:3000/getToken', 'code');
+      router.push(authUrl);
 
-    // } catch (error) {
-    //   console.error('Error generating auth URL:', error);
-    // }
+    } catch (error) {
+      console.error('Error generating auth URL:', error);
+    }
   }
   if (loading) {
     return (
@@ -354,7 +357,6 @@ const ShowDocs = () => {
                             setPath(file.path_display)
                             console.log('path', path)
                           }}>
-
                             Consulter
                           </button>
                         </Table.Cell>
@@ -386,7 +388,7 @@ const ShowDocs = () => {
         <Image src={vide} className='w-60 h-40' />
         <div className='flex justify-center items-center  flex-col gep-6' >
           <p className='text-md font-light '>Aucun fichier a afficher pour le moment </p>
-          <button className='p-2 px-4 bg-blue-700 hover:bg-blue-500 text-md font-meduim text-white rounded-md' onClick={() => Ajouter()}>
+          <button className='p-2 px-4 bg-blue-700 hover:bg-blue-500 text-md font-meduim text-white rounded-md' onClick={() => getToken()}>
             Refresh Token
           </button>
         </div>

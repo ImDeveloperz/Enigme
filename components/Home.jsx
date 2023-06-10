@@ -1,6 +1,6 @@
 import React,{Suspense} from 'react'
 import Link from 'next/link'
-// import { Fade } from 'react-reveal'
+import { Text } from '@/utils/Text';
 import Image from 'next/image';
  import  home  from '../images/home.png'
 import { Canvas } from "@react-three/fiber";
@@ -16,9 +16,10 @@ const Home = () => {
         <div className='flex md:w-[50%] w-full justify-start flex-col py-6 md:mr-10'>
          
           <h1 className='text-3xl sm:text-4xl xl:text-5xl text-white  text-gradient py-1'>
-          Un accès simple  et sécurisé à votre contenu UUUU</h1>
+          {Text[0].Home.home_title}
+         </h1>
           <p className='text-gray-300 text-left font-light mt-5 xl:w-9/12 text-base md:w-11/12 w-9/12'>
-          Stockez vos fichiers et dossiers que vous préférez, partagez-les avec vos collaborateurs, et travaillez dessus depuis votre appareil  ordinateur .
+          {Text[0].Home.home_content}
           </p>
          
           <Link href="/SignUpPage" className='flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546BD] ' >

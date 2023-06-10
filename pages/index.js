@@ -4,6 +4,8 @@ import { Footer, Home, Navbar, Servises, Contact, About, Services2 } from '../co
 // import { useStateContext } from '../contexts/contextProvider';
 // import { Navigate } from 'react-router-dom';
 import Loading from '../components/loading/Loading';
+import About1 from '@/components/About1';
+import LogoCloud from '@/components/LogoCloud';
 
 // import Mouse from '../components/utils/animation/Mouse'
 const Homepage = () => {
@@ -13,9 +15,9 @@ const Homepage = () => {
   //   return <Navigate to="/docs"/>
   // }
 
-  setTimeout(()=>{
+   setTimeout(()=>{
     setIsLoading(false);
-  },3000)
+   },3000)
    if(isLoading) return (<Loading/>)
    return(
    <main className="w-full bg-[#090913] ">
@@ -23,10 +25,12 @@ const Homepage = () => {
      <Navbar />
      <Home />
    </div>
-   <About/>
+   {/* <About1/> */}
+    <About/>
+   <LogoCloud/>
   <div className="bg-no-repeat bg-[url('../images/elipse.png')]">
   <Servises />
-  <Services2/>
+  {/* <Services2/> */}
    <Contact />
   </div>
    <Footer />
