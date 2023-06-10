@@ -384,7 +384,7 @@ const ShowDocs = () => {
   }
   return (
     <Layout>
-      <div className='flex flex-col justify-center items-center h-[80%]  gap-8 '>
+      <div className='flex flex-col justify-center items-center h-[80%]  gap-8' >
         <Image src={vide} className='w-60 h-40' />
         <div className='flex justify-center items-center  flex-col gep-6' >
           <p className='text-md font-light '>Aucun fichier a afficher pour le moment </p>
