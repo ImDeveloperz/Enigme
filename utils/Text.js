@@ -5,17 +5,16 @@ export const Text=[{
         item3 : 'Service',
     },
     Home : {
-        home_title : 'Bienvenue sur Enigme Cloud',
-        home_content : 'Protection des donnees personnelles et confidencialite en ligne pour tous , Enigme Cloud vous simplifie la vie en toute securite .',
+        home_title : 'Bienvenue sur Enigme Cloud ',
+        home_content : 'Facile à utiliser, fiable, privé et sécurisé. Pas étonnant qu’Enigme soit le pont et le choix pour protéger et partager vos fichiers les plus importants dans le cloud.',
 
     },
     About : {
-        about_title : 'Acceès facile aux données en toute sécurité',
-        about_content : "Enigme Cloud est essentiel pour garder les donnees personnelles en securite , a jour et disponibles ou que vous soyez. Sur EnigmeCloud, vous pouvez acceder a vos photos , vos fichiers et plus encore a partir de n'importe quel navigateur Web. ",
-        
+        about_title : 'Accès facile aux données en toute sécurité',
+        about_content : "Enigme cloud est essentielle pour garder les données personnelles en sécurité à jour et disponible ou que vous soyer .sur Enigme Cloud vous pouvez accéder à vos photos vos fichiers et plus encore à partir de n’importe quel navigateur web. ",
     },
     Service : {
-        service_title : 'EnigmeCloud vous permet de fournir des informations sensibles a des collaborateurs de confience . ',
+        service_title : "Services que nous Continuer à l’améliorer ",
        
         //item 1 -> Securite en tout temps
         service_item1_title : 'Sécurité en tout temps',

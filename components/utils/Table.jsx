@@ -72,7 +72,7 @@ export default function App() {
         }}
       >
         <Row justify="center" align="center">
-          <Text b>Confirm</Text>
+          <Text b>Confirmer</Text>
         </Row>
         <Row>
           <Text>
@@ -123,7 +123,7 @@ export default function App() {
         }}
       >
         <Row justify="center" align="center">
-          <Text b>Modifier le Statue du {user}</Text>
+          <Text b>Modifier le statut de {user}</Text>
         </Row>
         <Row>
           <div className="w-full flex justify-center items-center">
@@ -221,7 +221,7 @@ export default function App() {
     );
   }
   return (
-    <div className="pb-8 px-12 pt-10">
+    <div className="pb-8 px-12 pt-36 ">
       <Table
         sticked
         striped
@@ -281,7 +281,7 @@ export default function App() {
                       </Tooltip>
                     </Col>
                     <Col css={{ d: "flex" }}>
-                      <Tooltip content="Edit user">
+                      <Tooltip content="Modifier utilisateur">
                         <Popover>
                           <Popover.Trigger>
                             <IconButton>
@@ -295,7 +295,7 @@ export default function App() {
                       </Tooltip>
                     </Col>
                     <Col css={{ d: "flex" }}>
-                      <Tooltip content="Delete user" color="error">
+                      <Tooltip content="Supprimer utilisaeur" color="error">
                         <Popover>
                           <Popover.Trigger>
                             <IconButton>
@@ -318,7 +318,7 @@ export default function App() {
           shadow
           noMargin
           align="center"
-          rowsPerPage={8}
+          rowsPerPage={6}
           onPageChange={(page) => console.log({ page })}
         />
       </Table>

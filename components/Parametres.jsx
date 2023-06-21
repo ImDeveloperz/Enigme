@@ -15,10 +15,10 @@ const Parametres = () => {
        }
        fetch()
        
-    },[comptesType])
+    },[])
   return (
-    <div className='flex w-full h-full flex-col justify-center items-center text-white'>
-         <div className='shadow-xl rounded-md bg-[#18181B] w-[60%] py-6 px-10'>
+    <div className='flex w-full h-full flex-col justify-center bg-[#090913] items-center text-white'>
+         <div className='shadow-xl rounded-md blue-glassmorphism  w-[60%] py-6 px-10'>
               <div>
                 <p className='text-md font-meduim text-center'>Gestion de paramètre des comptes</p>
               </div>

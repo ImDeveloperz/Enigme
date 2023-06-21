@@ -1,7 +1,11 @@
 import React from 'react'
 import { SignUp } from '../components/utils/RightSide'
 import { LeftSide } from '../components/utils'
+import { useStateContext } from "@/utils/AuthContext.js";
+
 const SignUpPage = () => {
+  const { setUser, setToken,token } = useStateContext()
+  
   return (
     <div className=' flex w-full h-screen'>
      <LeftSide/>

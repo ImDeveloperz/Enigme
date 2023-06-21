@@ -3,11 +3,14 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     // const id =req.body
     const userId =req.body
-    console.log('hh',userId)
     db.execute('SELECT * FROM `compte` where user_id=?',[userId],(err,reslt)=>{
-      console.log(reslt)     
-        return res.json({ compte : reslt});
-    })     
-   
+        if(err){
+          return res.status(500).json({message: "server err"});
+        }
+        else{
+          return res.json({ compte : reslt});
+        }
+    })   
+     
     }
   }

@@ -158,14 +158,14 @@ const ProfileEdit = () => {
       </div>
     );
   return (
-    <div className="w-full">
+    <div className="w-full pt-32 ">
       <div className="p-8 px-20 h-screen w-full flex flex-col gap-10 ">
         <div className="w-full  flex gap-10 justify-center items-center">
           {/* <Image src={avatar} alt="" className='w-[12rem] h-[11.5rem] ' /> */}
           {/* <input type="file" /> */}
           <div className="border rounded-[100%] flex items-center justify-center  w-32 h-[60%] cursor-pointer">
             <label className="w-full h-full relative" htmlFor="file-upload">
-              <AiOutlineCamera className="z-10 absolute w-12 text-gray-600 top-4 left-8 h-16" />
+              {/* <AiOutlineCamera className="z-10 absolute w-12 text-gray-600 top-4 left-8 h-16" /> */}
               <Image
                 src={imageSrc ? imageSrc : avatar}
                 className="rounded-[100%] h-full w-full border-2 border-blue-500 bg-blur"

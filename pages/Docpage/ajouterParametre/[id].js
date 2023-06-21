@@ -273,19 +273,19 @@ function Page() {
   }
   return (
     <Layout>
-      <div className="h-[80%] w-full items-center justify-center">
-        <div className=" mx-40 mt-20 rounded-md">
+      <div className="h-[100%] w-full pt-28 text-white items-center justify-center bg-[#090913] ">
+        <div className=" px-40  pt-20 rounded-md">
           <div className="flex justify-center items-center">
-            <p className="font-bold text-xl">Paramètres {nomCompte}</p>
+            <p className="font-bold text-xl pb-6">Paramètres {nomCompte}</p>
           </div>
-          <div className="pb-8 px-12 pt-10">
+          <div className="bg-white rounded-xl">
             <Table
               sticked
               striped
               aria-label="Example static collection striped table"
               css={{
                 minWidth: "100%",
-                minHeight: "100%",
+                minHeight: "100%",   
               }}
             >
               <Table.Header>
@@ -341,8 +341,11 @@ function Page() {
                 })}
               </Table.Body>
             </Table>
-            <div className="flex justify-end items-end mt-4">
-            <Popover>
+           
+          </div>
+        </div>
+        <div className="flex justify-end mr-40  mt-4">
+            <Popover placement="bottom">
               <Popover.Trigger>
                 <Button>Ajouter Parametre</Button>
               </Popover.Trigger>
@@ -351,8 +354,6 @@ function Page() {
               </Popover.Content>
             </Popover>
             </div>
-          </div>
-        </div>
         <ToastContainer
           position="bottom-left"
           autoClose={5000}

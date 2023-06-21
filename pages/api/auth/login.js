@@ -10,13 +10,15 @@ export default async function handler(req, res) {
     const { email, password } = req.body;
 
   
-  db.execute('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
-      
+  db.execute('SELECT * FROM `users` WHERE email = ?', [email], async (error, results) => {
       if (error) {
         res.json({ message: 'Server error' });
       } else if (results.length === 0) {
-        // res.json({ message: 'Invalid email or password' });
+        console.log(email)
+        console.log(results)
+       return res.json({ message: 'Invalid email or password' });
       } else {
+        console.log(password)
         const match = await bcrypt.compare(password,results[0].password) ;
 
          console.log(match) 
@@ -28,11 +30,10 @@ export default async function handler(req, res) {
             },
             secret
           );
-       return  res.status(200).json({ token :token,user:results[0] });
+   return  res.status(200).json({ token :token,user:results[0] });
         } else {
-          res.json({ message: 'Invalid email or password' });
+         return res.json({ message: 'Invalid email or password' });
         }
-        
       }
     });
   }

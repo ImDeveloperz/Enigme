@@ -8,10 +8,10 @@ import Image from 'next/image';
 // import { useNavigate } from 'react-router-dom';
 import { useRouter } from 'next/router'
 
-const NavbarItems=({item,classProps})=>{
+const NavbarItems=({item,classProps,link})=>{
   return(
     <li className={`mx-4 cursor-pointer ${classProps}`}>
-      {item}
+     <a href={link}> {item}</a>
     </li>
   )
 }
@@ -26,11 +26,11 @@ const Navbar = () => {
        <ul className='text-white hidden justify-between md:flex liste-none gap-10 flex-row items-center '>
             <div className='md:flex hidden liste-none '>
             {["Home","About","Services","Contact"].map((item,index) => (
-              <NavbarItems key={item +index} item={item}/>
+              <NavbarItems key={item +index} link={'#'+item} item={item}/>
            ))}
             </div>
            <li className='bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546BD] ' onClick={()=>{navigate('/signin')}}>
-            Login
+            Se connecter
            </li>
        </ul>
        <div className='flex relative flex-start  z-50 h-full'>
@@ -43,7 +43,7 @@ const Navbar = () => {
               <AiOutlineClose  className='absolute right-8 ' onClick={()=>setToggleMenu(false)}/>
              </li>
              {["Home","About","Services","Contacts"].map((item,index) => (
-              <NavbarItems key={item +index} item={item} classProps='my-2 text-lg hover:text-[#2952E3]'/>
+              <NavbarItems key={item +index} link={'#'+item} item={item} classProps='my-2 text-lg hover:text-[#2952E3]'/>
            ))}
           </ul>
              : null}

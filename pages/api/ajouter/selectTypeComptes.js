@@ -7,8 +7,12 @@ export default async function handler(req, res) {
     
   
       db.execute('SELECT * FROM `typecompte`  ',(err,reslt)=>{
-     
+      if(err){
+        console.log("error")
+      }else{
         return res.json({ compte : reslt});
+      }
+       
     })    
         // console.log('hh')       
       }

@@ -49,7 +49,7 @@ export const InputHeader=({title,body})  => {
 export const InputFooter = ({fisrtPara,secondPara,span})  => {
     const [isSignin, setIsSignin]=useState(true);
     useEffect(()=>{
-        if(span!='Sign in'){
+        if(span!='Connectez-vous'){
             setIsSignin(false);
         }
         else{

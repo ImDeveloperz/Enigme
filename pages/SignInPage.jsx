@@ -3,17 +3,14 @@ import { LeftSide} from '../components/utils'
 import { SignIn } from '../components/utils/RightSide'
 // import {BrowserRouter as Router,Routes,Route, useNavigate, Navigate} from 'react-router-dom'
 // import { useStateContext } from '../contexts/contextProvider'
- 
+import { useStateContext } from "@/utils/AuthContext.js";
+
 
 const Signpage = () => {
-  // const navigate =useNavigate()
-  // const {token}=useStateContext()
-  // console.log(token)
+  const { setUser, setToken,token } = useStateContext()
 
-//   if (token) {
-//     return <Navigate to="/docs"/>
-//  }
-  return (
+ 
+ return (
     <div className=' flex w-full h-screen'>
      <LeftSide/>
        <div className='w-full md:w-[70%] h-screen pt-10 bg-white text-black' >

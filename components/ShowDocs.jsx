@@ -117,18 +117,18 @@ const ShowDocs = () => {
 
   const Layout = ({ children }) => {
     return (
-      <div className='w-full  flex h-full'>
-        <div className='bg-gray-200 h-full w-[20%] text-white'>
-          <div className='flex items-center flex-col gap-8 h-full '>
-            <h1 className='text-black p-4 pt-8'>
+      <div className='w-full bg-white flex h-[100%]'>
+        <div className='bg-[#090913] h-[100%] w-[20%] text-white'>
+          <div className='flex items-center flex-col gap-8 h-[100%]'>
+            <h1 className=' p-4 pt-[9.5rem] '>
               Comptes
             </h1>
-            <div className='border rounded-lg flex flex-col gap-4'>
+            <div className='rounded-lg flex flex-col gap-4'>
               {comptes?.map((compte) => {
                 return (
-                  <div key={compte.nomCompte+compte.typeCompte_id} className='flex gap-6 px-4 py-2 rounded-lg hover:bg-slate-400 text-black items-center justify-center'>
+                  <div key={compte.nomCompte+compte.typeCompte_id} className='flex gap-6 px-4 py-2 border-blue-600 rounded-lg hover:bg-slate-400 text-white items-center justify-center'>
                     <p>{compte.nomCompte}</p>
-                    {compte.typeCompte_id == 0 ? <BsDropbox /> : <DiGoogleDrive />}
+                    {compte.typeCompte_id == 0 ? <BsDropbox /> : <DiGoogleDrive width='18' hieght='18' />}
                   </div>
                 )
               })}
@@ -137,7 +137,7 @@ const ShowDocs = () => {
           </div>
         </div>
         <div className='w-[80%]'>
-          <div className='w-full items-center flex justify-between  bg-gray-200 p-4 shadow-md '>
+          <div className='w-full items-center flex justify-between text-white pt-36 bg-[#090913] p-4 shadow-md '>
             <p>Mes documments</p>
             <div className='items-end flex h-full  ml-6 pb-4 relative'>
 
@@ -147,7 +147,7 @@ const ShowDocs = () => {
               }}>
                 Ajoute Compte
               </button>
-              <div className={` ${active ? 'flex flex-col z-[1000] rounded-xl p-10 absolute top-0 right-0 bg-white shadow-lg' : 'hidden'}`}>
+              <div className={` ${active ? 'flex flex-col z-[1000] rounded-xl p-10 absolute text-black top-0 right-0 bg-white shadow-lg' : 'hidden'}`}>
                 <div className='w-[300px] flex justify-center flex-col items-center'>
                   <p className='text-md font-medium  '> Choisir le type du Compte</p>
                 </div>
@@ -219,6 +219,18 @@ const ShowDocs = () => {
       </div >
     )
   }
+  const calculateSize = (size) =>{
+    if(size < 125000) {
+         size = size/125 + " Kb"
+         return size
+    }
+    else{
+      const nb = 125000
+      size = size/nb; 
+      size = (size).toFixed(2) +" Mb"
+      return size
+    }
+  }
   const [crypte,setCrypte]=useState('crypter')
   const Ajouter = async () => {
     const nom = nomref.current.value
@@ -251,7 +263,7 @@ const ShowDocs = () => {
   if (loading) {
     return (
       <Layout>
-        <div className='h-[80%]  items-center justify-center flex '>
+        <div className='h-[68%] items-center justify-center flex '>
           <SimpleLoad />
         </div>
       </Layout>
@@ -261,7 +273,7 @@ const ShowDocs = () => {
     if (datac || path != "") {
       return (
         <Layout>
-          <div className='w-full   bg-white  p-4'>
+          <div className='w-full bg-white p-4'>
             <Table aria-label="Mes Docs" css={{ height: "auto", minWidth: "100%" }}>
               <Table.Header>
                 <Table.Column>NAME</Table.Column>
@@ -296,11 +308,11 @@ const ShowDocs = () => {
                       return (
                         <Table.Row key={file.name}>
                           <Table.Cell>{IconFile(file.name.split('.').pop())} {file.name}</Table.Cell>
-                          <Table.Cell>{file.size}</Table.Cell>
-                          <Table.Cell>{file['.tag']}</Table.Cell>
+                          <Table.Cell>{calculateSize(file.size)}</Table.Cell>
+                          <Table.Cell>fichier</Table.Cell>
                           <Table.Cell>
                             <div>
-                              <Popover placement='bottom-right' css={{ w: "800" }}>
+                              <Popover placement='bottom-left' css={{ w: "400" }}>
                                 <Popover.Trigger>
                                   <div className='cursor-pointer'>
                                     <CiMenuKebab />
@@ -351,7 +363,7 @@ const ShowDocs = () => {
                       (<Table.Row key={file.name}>
                         <Table.Cell>{IconFile(file.name.split('.').pop())} {file.name}</Table.Cell>
                         <Table.Cell>__</Table.Cell>
-                        <Table.Cell>{file['.tag']}</Table.Cell>
+                        <Table.Cell>dossier</Table.Cell>
                         <Table.Cell>
                           <button onClick={() => {
                             setPath(file.path_display)
@@ -384,7 +396,7 @@ const ShowDocs = () => {
   }
   return (
     <Layout>
-      <div className='flex flex-col justify-center items-center h-[80%]  gap-8' >
+      <div className='flex flex-col justify-center items-center h-[68%]  gap-8' >
         <Image src={vide} className='w-60 h-40' />
         <div className='flex justify-center items-center  flex-col gep-6' >
           <p className='text-md font-light '>Aucun fichier a afficher pour le moment </p>
