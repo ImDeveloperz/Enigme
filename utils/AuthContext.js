@@ -5,6 +5,7 @@ import {createContext,useContext,useEffect,useState} from "react"
 const StateContext =createContext({
     currentUser : null,
     token: null,
+    tokenAccess :null,
 
     tokenAccess :null,
     countId: 23,
@@ -20,6 +21,7 @@ export const AuthContext =({children})=>{
     const [user ,setUser]=useState({})
     const [token,_setToken]=useState();
 
+
     const [codeCloud,_setCodeCloud]=useState();
     const [countId,_setCountId]=useState()
     const [tokenAccess,_setTokenAccess]=useState();
@@ -28,6 +30,7 @@ export const AuthContext =({children})=>{
         if(token) localStorage.setItem('TOKEN_ACCESS',token);
         // else localStorage.removeItem('TOKEN_ACCESS');
     }
+
     const setCountId=(id)=>{
         _setTokenAccess(id)
         if(id) localStorage.setItem('COUNT_ID',id);
@@ -42,17 +45,17 @@ export const AuthContext =({children})=>{
     const  setToken=(token) => {
         _setToken(token);
         if(token) localStorage.setItem('ACCESS_TOKEN',token);
-        else localStorage.removeItem('ACCESS_TOKEN');
+        // else localStorage.removeItem('ACCESS_TOKEN');
       }
     useEffect(()=>{ 
           // 👉️ true
+          _setTokenAccess(localStorage.getItem('TOKEN_ACCESS'))
 
           _setCountId(localStorage.getItem('COUNT_ID'))
           _setCodeCloud(localStorage.getItem('CODE_CLOUD'))
           _setTokenAccess(localStorage.getItem('TOKEN_ACCESS'))
 
     _setToken(localStorage.getItem('ACCESS_TOKEN'));
-   
     }
 ,[]  )
 
@@ -62,7 +65,7 @@ export const AuthContext =({children})=>{
             user,
             token,
             setUser,
-
+            setToken,
             setToken,
             setCountId,
             countId,

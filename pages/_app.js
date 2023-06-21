@@ -5,10 +5,8 @@ import { BrowserRouter } from 'react-router-dom'
 import { SessionProvider } from "next-auth/react"
 export default function App({ Component, pageProps,session }) {
   return(
-    <SessionProvider session={session}>
     <AuthContext>
         <Component {...pageProps} /> 
     </AuthContext>
-    </SessionProvider>
   ) 
 }

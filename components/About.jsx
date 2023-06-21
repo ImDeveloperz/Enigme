@@ -9,13 +9,18 @@ import ab7 from '../images/ab7.png'
 import ab8 from '../images/ab8.png'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { Text } from '@/utils/Text';
+
 import Image from 'next/image';
+import { useInView } from 'react-intersection-observer'
 // import { Link } from 'react-router-dom'
 const About = () => {
+  const { ref: aboutRef, inView : myElemVisible } = useInView();
+
   return (
-    <div className='my-36 w-full  items-center ' id="About">
+    <div className={`pt-36 px-16 pb-16 w-full  items-center ${myElemVisible ? 'view' : 'hidde'}`}   id="About" ref={aboutRef}>
       {/* <p className='text-7xl Font-bold pb-20 text-white '>About <span className='text-blue-600'>Us</span></p> */}
-      <div className='flex md:flex-row flex-col    px-4 '>
+      <div className='flex md:flex-row flex-col '>
         <div className='md:w-[50%] flex w-full  relative  '>
           <Image src={ab3} alt="" className=' h-52 right-10  -top-14 absolute ' />
           <Image src={ab1} alt="" className='w-full md:w-[90%] ' />
@@ -28,18 +33,13 @@ const About = () => {
 
         </div>
         <div className='flex gap-4 md:w-[50%] w-full  flex-col py-6  md:mr-10'>
-          <h2 className='text-3xl sm:text-4xl xl:text-5xl text-white  text-gradient py-1'>Lorem  ipsum  <br /> consequat dolor  elitsed
-            sit</h2>
+          <h2 className='text-3xl sm:text-4xl xl:text-5xl text-white  text-gradient py-1'>{Text[0].About.about_title}</h2>
           <p className='text-gray-300 text-left font-light mt-5 xl:w-9/12 text-base md:w-11/12 w-9/12'>
-            Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt
-            ut l abore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat</p>
+            {Text[0].About.about_content}
+           </p>
           <Link href='/SignInPage' className='flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546BD] ' >
-            <button type='button'
-            >
-              <p className='text-white text-base font-semibold '>Sign Up</p>
+            <button type='button'>
+              <p className='text-white text-base font-semibold '>En savoir plus</p>
             </button>
           </Link>
         </div>

@@ -4,12 +4,12 @@ import React, { useEffect } from 'react'
 import ProfileEdit from './ProfileEdit';
 // import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import ProfileView from './ProfileView';
-import { useStateContext } from '../config/AuthContext';
+// import { useStateContext } from '../config/AuthContext';
 import axiosClient from '../axios-client';
 
 const Profile = () => {
   // const { user } = AuthUser()
-  const { user, token, setUser,setToken } = useStateContext();
+  // const { user, token, setUser,setToken } = useStateContext();
   // useEffect(() => {
   //   axiosClient.get('/user')
   //     .then(({data}) => {

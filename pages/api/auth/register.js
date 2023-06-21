@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
+import { sign } from "jsonwebtoken";
 import { db } from "../../../config/db"
 const secret = process.env.SECRET;
 export default async function handler(req, res) {
@@ -13,9 +13,9 @@ export default async function handler(req, res) {
         return res.json({ message:'email already exist'});
       }
     })
-    db.execute('INSERT INTO `users` (name,prenom,email,password) VALUES (?, ?,?,?)', [name,prenom,email,hashedPassword], (error, results) => {
+    db.execute('INSERT INTO `users` (name,prenom,email,password) VALUES (?,?,?,?)', [name,prenom,email,hashedPassword], (error, results) => {
       if (error) {
-        res.status(500).json({ message: error });
+     return   res.status(500).json({ message: error });
       } else {
         const token =sign(
           {
@@ -29,9 +29,7 @@ export default async function handler(req, res) {
           function(err, results, fields) {
             const user = results
               res.status(200).json({ token });
-          })
-        // console.log('hh')
-        
+          })        
       }
     });
   }

@@ -15,8 +15,9 @@ function verifyToken(req){
         const email=verifyToken(req)
         console.log(email)
         db.execute('SELECT * FROM `users` where email=? ',[email],(err,reslt)=>{
+        
             res.status(200).json({
-                user: reslt[0],
+                user: reslt[0]
               });
           })
        

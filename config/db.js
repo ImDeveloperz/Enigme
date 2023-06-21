@@ -16,5 +16,5 @@ db.getConnection((err)=>{
 db.execute(
   'SELECT * FROM `users` ',
   function(err, results, fields) {
-    console.log(results); 
+    // console.log(results); 
   })

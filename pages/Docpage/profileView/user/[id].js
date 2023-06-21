@@ -1,9 +1,11 @@
-import React from 'react'
 import Layout from '@/components/Layout'
+import ProfileEdit from '@/components/ProfileEdit'
+import React from 'react'
+
 const index = () => {
   return (
     <Layout>
-        Dowload
+          <ProfileEdit/>
     </Layout>
   )
 }

@@ -20,7 +20,6 @@ const GetToken = () => {
         
     // }
 }
-   
     getTokeen();
   return (
     <div className='flex flex-col justify-center items-center '>

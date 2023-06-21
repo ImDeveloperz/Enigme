@@ -23,12 +23,14 @@ const ProfileView = ({ id }) => {
   }, [])
   console.log(user);
   return (
-    <div className='p-4 flex flex-col gap-10 text-black'>
-      <div className='flex items-center gap-8 text-sm font-semibold shadow-xl rounded-xl border p-8'>
+    <div className='p-4 pt-40 flex h-full flex-col gap-10 bg-[#090913] text-white '>
+      <div className='flex items-center gap-8 text-sm font-semibold justify-center shadow-xl rounded-xl border p-8'>
         {isLoading ? <Skeleton classes="profile-circle"/> :
-                 <Image src={avatar} alt="" className='w-[12rem] h-[11.5rem]' />
-        }
-        
+                //  <Image src={user?.image ? user?.image : avatar} alt="profile" className='rounded-[100%] border-2 border-blue-700 w-[10rem] h-[10rem]' width="200" height="200" />
+               <div className='w-44 h-44 pt-8 mb-8'>
+                  <User rounded size='2xl' color="primary" src={user?.image ? user?.image : avatar}  alt='profile' />
+               </div>
+        } 
         <div className='flex flex-col gap-4  w-full '>
         {isLoading ? <Skeleton classes="title"/> :
                  <p className='text-2xl'>
@@ -72,7 +74,7 @@ const ProfileView = ({ id }) => {
           type="submit"
           className="rounded-md md:w-[15%] w-[25%] bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-           <Link href={'/docs/user/' + user.id}> Modifier Votre Profile</Link>
+           <Link href={'/Docpage/profileView/user/' + user?.id_User}> Modifier Votre Profile</Link>
         </button>
       </div>
     </div>

@@ -15,21 +15,24 @@ const LeftSide = () => {
         <Fade left>
         <div className='flex flex-col  gap-4'>
             
-            <h1 className='xl:text-[4.2rem] md:text-[3rem] text-bold leading-none '>welcom to our<br/> community</h1>
-            <p className=''>clarity and secure gives you more confidence to us.</p>
+            <h1 className='xl:text-[2.5rem] md:text-[1.5rem] text-bold leading-none '>Bienvenue dans notre <br/> communauté</h1>
+            <p className='text-sm opacity-50 '>
+             La clarté et la sécurité vous donnent plus de confiance en nous.
+           </p>
         </div>
-        <div className=''>
+        <div className='text-sm p-14'>
             <Fade left>
-            <p>
-                "Store your favorite files and folders,<br/> share them  with your collaborators,<br/>
-                 and work on them from your computer device."
+            <p className=' opacity-40 font-extralight'>
+            &quot;"Enigme Cloud : la solution de cryptage pour une confidentialité totale sur le cloud.
+             Cryptez, synchronisez et sécurisez vos données sensibles
+             en un clic sur le cloud.&quot;
             </p>
             </Fade>
         </div>
         </Fade>
         </div>
         <div className='flex-end absolute bottom-0 right-0'> 
-            <Image src={vector1} alt="" className='w-26 h-20' />
+            <Image src={vector1} alt="" className='w-56 h-20' />
         </div>
     </div>
   )
