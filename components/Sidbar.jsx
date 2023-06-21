@@ -87,6 +87,7 @@ const Sidbar = () => {
     location:"/Docpage/Profile",
     role: 2
   }
+
   ];
   const NavbarItems=({item,classProps})=>{
     return(

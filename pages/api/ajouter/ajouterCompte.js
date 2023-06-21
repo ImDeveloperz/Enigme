@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     console.log('hh : ',data.typeCompte)
     try{
       db.execute('INSERT INTO `compte` (nomCompte,user_id,methode_id,typeCompte_id) VALUES (?,?,?,?)',[data.nom,data.userId,data.typeCrypte,data.typeCompte] ,(error, results) => {
+
       // console.log('db.getQueryLog() : ',db.getQueryLog())
       console.log("result : ",error)
         if (error) {
