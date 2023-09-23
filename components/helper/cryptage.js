@@ -69,12 +69,12 @@ export async function processFile(name, path, tokenAccess) {
     console.log("encrypted content : ", encryptedContent);
     const blob = new Blob([encryptedContent], { type: file.type });
     const f = new File([blob], name + ".enc");
-    console.log(f);
+    console.log("file : ",f);
     const dbx = new Dropbox({ accessToken: tokenAccess });
     dbx
       .filesUpload({ path: path + ".enc", contents: f })
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
       })
       .catch(function (error) {
         console.error(error);
@@ -82,9 +82,26 @@ export async function processFile(name, path, tokenAccess) {
   };
 
   const res = reader.readAsArrayBuffer(file);
-  console.log(res);
+  console.log("res : ",res);
 }
 
+export async function encryptFile(file,name) {
+  console.log(result)
+   file = await result.blob();
+  const reader = new FileReader();
+  console.log("reader : ", reader);
+  reader.onload = async function (event) {
+    const fileContent = event.target.result;
+    const { encryptedContent } = await encryptData(fileContent, name);
+    console.log("encrypted content : ", encryptedContent);
+    const blob = new Blob([encryptedContent], { type: file.type });
+    const f = new File([blob], name + ".enc");
+    console.log(f);
+    return f;
+  }
+  const res = reader.readAsArrayBuffer(file);
+  console.log(res);
+}
 export async function decryptFile(name, path, tokenAccess) {
   const response = await fetch(
     "https://content.dropboxapi.com/2/files/download",
