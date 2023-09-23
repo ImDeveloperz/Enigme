@@ -125,7 +125,7 @@ const UploadFiles = () => {
 
             </div>
             <div className='flex gap-10  font-meduim '>
-                <button className='border-white border p-2 px-6 rounded-md  text-white'>Crypter</button>
+                <button className='border-white border p-2 px-6 rounded-md  text-white' onClick={()=>{ }}>Crypter</button>
                 <button className='p-2 px-6 rounded-md border bg-blue-500 hover:bg-blue-700 border-blue-400' onClick={() => UploadFile(files)}>Envoyer</button>
             </div>
             <ToastContainer
