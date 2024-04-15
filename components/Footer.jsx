@@ -12,7 +12,7 @@ import Link from 'next/link'
 const Footer = () => {
   return (
    <div className='pt-10 ' >
-       <div className="bg-blue-700 my-6 -rotate-1   w-full py-2 h-10 flex-items-center justify-center">
+       <div className="bg-blue-700 my-7 -rotate-1   w-full py-2 h-10 flex-items-center justify-center">
             <div className='flex gap-8 text-white  font-light text-[14px]'>
             <p>
               All rights reserved  
