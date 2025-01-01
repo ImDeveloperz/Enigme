@@ -55,7 +55,7 @@ const Footer = () => {
    <div className=' text-center items-center flex-col flex md:w-[50%] pt-10 w-full p-6'>
     <p className='text-white text-md opacity-50 font-medium '>
     Nous sommes déterminés à vous offrir une expérience utilisateur exceptionnelle. Si vous avez des questions, 
-    des préoccupations ou des suggestions, n'hésitez pas à nous contacter. Notre équipe de support est là pour vous aider.
+    des préoccupations ou des suggestions, n hésitez pas à nous contacter. Notre équipe de support est là pour vous aider.
     </p>
     <p className='text-md font-md text-blue-500' >Merci pour votre Visite</p>
    </div>

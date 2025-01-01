@@ -32,7 +32,7 @@ return (
           {Text[0].Service.service_title} 
         </h1>
         <p className="text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base">
-        Avec Enigme Cloud, vous pouvez protéger vos fichiers en bénéficiant d'un niveau de sécurité élevé. Notre App assure une sauvegarde confidentielle, vous permettant de sécuriser vos données avant de les partager sur le cloud ou de protéger celles déjà présentes.
+        Avec Enigme Cloud, vous pouvez protéger vos fichiers en bénéficiant d un niveau de sécurité élevé. Notre App assure une sauvegarde confidentielle, vous permettant de sécuriser vos données avant de les partager sur le cloud ou de protéger celles déjà présentes.
         </p>
       </div>
 

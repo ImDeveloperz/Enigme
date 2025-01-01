@@ -23,9 +23,9 @@ const LeftSide = () => {
         <div className='text-sm p-14'>
             <Fade left>
             <p className=' opacity-40 font-extralight'>
-            &quot;"Enigme Cloud : la solution de cryptage pour une confidentialité totale sur le cloud.
+            Enigme Cloud : la solution de cryptage pour une confidentialité totale sur le cloud.
              Cryptez, synchronisez et sécurisez vos données sensibles
-             en un clic sur le cloud.&quot;
+             en un clic sur le cloud
             </p>
             </Fade>
         </div>

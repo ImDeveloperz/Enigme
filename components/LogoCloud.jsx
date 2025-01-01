@@ -21,8 +21,8 @@ const LogoCloud = () => {
                 <div> 
                     <p className='text-white'>
                     Un service de stockage en ligne et de synchronisation de fichiers
-                    qui permet aux utilisateurs de stocker et d'accéder à leurs fichiers depuis différents appareils et endroits. 
-                    Il a été lancé en 2007 et a depuis gagné en popularité en tant que solution fiable et conviviale d'hébergement de fichiers.
+                    qui permet aux utilisateurs de stocker et d accéder à leurs fichiers depuis différents appareils et endroits. 
+                    Il a été lancé en 2007 et a depuis gagné en popularité en tant que solution fiable et conviviale d hébergement de fichiers.
                     </p>
                 </div>
             </div>

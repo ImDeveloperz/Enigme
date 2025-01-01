@@ -21,7 +21,7 @@ const Contact = () => {
           </button>
       </div>
        <div className='md:w-[50%] w-full '>
-        <Image src={contact} />
+        <Image alt='contact' src={contact} />
        </div>
     </div>
   )

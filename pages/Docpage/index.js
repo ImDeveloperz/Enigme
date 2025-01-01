@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import ShowDocs from "@/components/showDocs";
+//mport ShowDocs from "@/components/showDocs";
 import Loading from "@/components/suspense/Loading";
 import Layout from "@/components/Layout";
 const Docpage = () => {
@@ -17,7 +17,7 @@ const Docpage = () => {
   return (
     <Layout >
       <Suspense fallback={<Loading/>} >
-      <ShowDocs />
+   { /*<ShowDocs />*/}
       </Suspense>
     </Layout>
   );
