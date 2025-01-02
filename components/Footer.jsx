@@ -7,6 +7,7 @@ import insta from '@/images/insta.png'
 import github from '@/images/github.png'
 import { Card } from '@nextui-org/react';
 import Link from 'next/link'
+import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 
 
 const Footer = () => {
@@ -45,11 +46,19 @@ const Footer = () => {
           <Link href="#Services">Servises</Link>
           <Link href="#Contact">Contact</Link>
        </div> */}
-          <div className='flex gap-6'>
-            <Image src={twiter} alt='Twiter' width='30' height='16' className='cursor-pointer' />
-            <Image src={insta} alt='insta' width='30' height='16' className='cursor-pointer' />
-            <Image src={facbook} alt='facbook' width='30' height='16' className='cursor-pointer' />
-            <Image src={github} alt='github' width='30' height='16' className='cursor-pointer' />
+          <div className='flex text-white items-center justify-center gap-6'>
+            <div className='cursor-pointer p-[6px] white-glassmorphism'>
+              <FaInstagram className='cursor-pointer' />
+            </div>
+            <div className='cursor-pointer p-[6px] white-glassmorphism'>
+              <FaTwitter className='cursor-pointer' />
+            </div>
+            <div className='cursor-pointer p-[6px] white-glassmorphism'>
+              <FaFacebook className='cursor-pointer' />
+            </div>
+            <div className='cursor-pointer p-[6px] white-glassmorphism'>
+              <FaWhatsapp className='cursor-pointer' />
+            </div>
           </div>
         </div>
         <div className=' text-center items-center flex-col flex md:w-[50%] pt-10 w-full p-6'>
