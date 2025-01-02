@@ -19,9 +19,10 @@ const Homepage = () => {
    return(
    <main className="w-full bg-[#090913] ">
    <div className=' w-full' id="Home" ref={homeRef} >
-     <button className={`rounded-[100%] w-20 h-20 flex items-center justify-center  blue-glassmorphism right-4 hover:bg-blue-700 hover:-translate-y-2 bottom-4 fixed ${myElemVisible && 'opacity-0'}`}>
-      <a href='#Home'> <AiOutlineArrowUp className='text-white h-10 w-10'/></a>
+     {/* <button className={`rounded-[100%] w-20 h-20 flex items-center justify-center  blue-glassmorphism right-4 hover:bg-blue-700 hover:-translate-y-2 bottom-4 fixed ${myElemVisible && 'opacity-0'}`}>
+     <a href='#Home'> <AiOutlineArrowUp className='text-white h-10 w-10'/></a>
      </button>
+     */}
      <Navbar />
        <Home  />
    </div>

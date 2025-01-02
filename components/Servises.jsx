@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 
 export const ServiceCard = ({ color, title, icon, subtitle }) => (
 
-  <div className="flex flex-row justify-start items-center white-glassmorphism p-3 m-2 cursor-pointer hover:shadow-xl" id="Services">
+  <div className="flex md:flex-row flex-col justify-start items-center white-glassmorphism p-3 m-2 cursor-pointer hover:shadow-xl" id="Services">
     <div className={`w-10 h-10 rounded-full flex justify-center items-center ${color}`}>
       {icon}
     </div>

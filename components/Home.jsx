@@ -46,7 +46,7 @@ const Home = () => {
               <div className={`rounded-br-2xl ${commonStyles}`}>Décrypter</div>
           </div>
         </div>
-        <div className=' md:flex-3 flex-1 relative h-full w-full md:w-[50%] '>
+        <div className=' md:flex-3 flex-1 md:flex hidden relative h-full w-full md:w-[50%] '>
         <Canvas >
             <Suspense fallback={null}>
               <OrbitControls enableZoom={true} />

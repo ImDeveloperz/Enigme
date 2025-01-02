@@ -8,7 +8,7 @@ const Contact = () => {
 
   return (
     <div id="Contact"  className={`text-white  flex flex-col md:flex-row pt-12 w-full gap-6 items-center ${myElemVisible ? 'view' : 'hidde'}`}  ref={contactRef} >
-      <div className='flex flex-col ml-24 justify-center py-10 p-5 md:w-[50%] blue-glassmorphism rounded-xl focus:outline-none gap-4 w-full'>
+      <div className='flex flex-col xl:ml-24 justify-center py-10 p-5 md:w-[50%] blue-glassmorphism rounded-xl focus:outline-none gap-4 w-full'>
           <p className='text-4xl font-meduim text-center w-full'>
             Contact Us
           </p>
