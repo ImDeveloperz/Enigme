@@ -13,7 +13,7 @@ const LogoCloud = () => {
     return (
         <div className={`flex flex-col items-center gap-16 justify-between mb-20 ${myElemVisible ? 'md:view' : 'md:hidde'}`} ref={logoRef}>
             <p className='text-center text-semibold text-white text-4xl'>Comptes Suppoter</p>
-              <div className='md:flex gap-6 opacity-60  px-32  w-full items-center justify-between hidden '>
+              <div className='flex gap-6 opacity-60 px-4 md:px-32  w-full items-center justify-between md:flex-row flex-col '>
             <div className='flex  gap-6 justify-center items-center flex-col  blue-glassmorphism  p-10 rounded-xl'>
                 <div>
                 <Image src={dropbox} alt="dropbox" />
